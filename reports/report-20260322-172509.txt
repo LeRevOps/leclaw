@@ -1,0 +1,45 @@
+
+> leclaw@0.1.0 data-quality
+> node agents/le-data-quality.js
+
+
+🦀 LeClaw — Le Data Quality Agent
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Connecting to HubSpot...
+✓ Found 5 contacts, 4 companies
+
+Running quality checks...
+
+🟡 MEDIUM SEVERITY (7)
+   Kash at Clay — Associate with a company
+   Bryony Pearce — Associate with a company
+   Kyle Saucier — Associate with a company
+   HubSpot — Add industry
+   Revenue Operations Alliance — Add industry
+   Sales Enablement Collective — Add industry
+   Clay — Add industry
+
+🟢 LOW SEVERITY (7)
+   Kash at Clay — Add job title
+   Bryony Pearce — Add job title
+   Kyle Saucier — Add job title
+   HubSpot — Add phone number
+   Revenue Operations Alliance — Add phone number
+   Sales Enablement Collective — Add phone number
+   Clay — Add phone number
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 AI SUMMARY
+
+# CRM Health Summary
+
+Your HubSpot instance shows **solid foundational health** with zero duplicates across 5 contacts and 4 companies, but has **actionable gaps** in critical data completeness. Seven medium-severity issues dominate the quality landscape—primarily **missing company associations** (3 contacts) and **missing industry data** (2 companies)—which directly impact segmentation, reporting, and sales execution. An additional 7 low-severity gaps (job titles, phone numbers) are secondary but compound the problem. Overall data coverage is approximately 65%, with company-level data being the weakest link. 
+
+**Recommended first action:** Immediately resolve the three unassociated contacts (Kash, Bryony, Kyle) and assign industries to HubSpot and Revenue Operations Alliance—this 30-minute effort will eliminate 50% of medium-severity issues and unlock proper account-based selling workflows.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total issues found: 14
+Shadow mode: ON — no changes written to HubSpot
+
