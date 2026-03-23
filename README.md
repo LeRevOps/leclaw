@@ -34,20 +34,35 @@ Sellers should never have to learn a CRM process. LeClaw handles the operational
 git clone https://github.com/LeRevOps/leclaw
 cd leclaw
 npm install
-cp .env.example .env
-# Add your API keys to .env
+npm run setup
 npm run data-quality
 ```
+
+`npm run setup` walks you through connecting your CRM, Anthropic API, and Slack in under 3 minutes. All credentials are entered securely (masked input, never logged) and saved to a local `.env` file that never leaves your machine.
 
 ---
 
 ## Environment Variables
 
+Set manually or via `npm run setup`:
+
 ```
-HUBSPOT_API_TOKEN=your_hubspot_private_app_token
-ANTHROPIC_API_KEY=your_anthropic_api_key
-SLACK_WEBHOOK_URL=your_slack_webhook_url
+# HubSpot
+HUBSPOT_API_TOKEN=
+
+# Salesforce
+SALESFORCE_ACCESS_TOKEN=
+SALESFORCE_INSTANCE_URL=
+
+# AI
+ANTHROPIC_API_KEY=
+
+# Slack (optional)
+SLACK_WEBHOOK_URL=
 ```
+
+> ⚠️ Never commit your `.env` file. It is gitignored by default.
+> See [SECURITY.md](SECURITY.md) for details on what data LeClaw accesses and stores.
 
 ---
 

@@ -1,3 +1,5 @@
 .env
 .vercel
 node_modules
+CLAUDE.md
+reports/

@@ -4,7 +4,10 @@
   "description": "Full Stack RevOps Agent Framework",
   "type": "module",
   "scripts": {
-    "data-quality": "node agents/le-data-quality.js"
+    "setup": "node setup.js",
+    "data-quality": "node agents/le-data-quality/index.js",
+    "data-quality:hubspot": "node agents/le-data-quality/index.js --crm hubspot",
+    "data-quality:salesforce": "node agents/le-data-quality/index.js --crm salesforce"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
