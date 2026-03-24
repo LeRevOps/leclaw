@@ -1,16 +1,57 @@
 {
-  "name": "leclaw",
-  "version": "0.1.0",
-  "description": "Full Stack RevOps Agent Framework",
+  "name": "@leclaw/core",
+  "version": "0.2.0",
+  "description": "Open-source RevOps agent framework for HubSpot and Salesforce",
   "type": "module",
+  "main": "./core/index.js",
+  "types": "./core/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./core/index.js",
+      "types": "./core/index.d.ts"
+    }
+  },
+  "files": [
+    "core/**/*.ts",
+    "core/**/*.js",
+    "core/**/*.d.ts",
+    "examples/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
+    "build": "tsc",
     "setup": "node setup.js",
-    "data-quality": "node agents/le-data-quality/index.js",
-    "data-quality:hubspot": "node agents/le-data-quality/index.js --crm hubspot",
-    "data-quality:salesforce": "node agents/le-data-quality/index.js --crm salesforce"
+    "data-quality": "node agents/le-data-quality/index.js"
+  },
+  "keywords": [
+    "revops",
+    "salesops",
+    "hubspot",
+    "salesforce",
+    "agents",
+    "crm",
+    "gtm",
+    "automation"
+  ],
+  "author": "LeClaw <hello@leclaw.io>",
+  "license": "MIT",
+  "homepage": "https://leclaw.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LeRevOps/leclaw.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LeRevOps/leclaw/issues"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
     "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
