@@ -1,28 +1,48 @@
-# 🦀 LeClaw
+# LeClaw
 
-**Full Stack RevOps. Purposebuilt for your CRMs.**
+**Full Stack RevOps. A team of AI agents for your CRM.**
 
 > Native agents are features inside a single product. LeClaw is infrastructure across your entire GTM stack.
 
----
+LeClaw is an open-source RevOps agent framework. Deploy a coordinated team of specialized agents into your CRM — each one owns a domain of revenue operations, shares context with the others, and only ever touches broken records.
 
-## What is LeClaw?
-
-LeClaw is an open-source RevOps agent framework that automates the manual work that lives between your CRM and your revenue targets.
-
-**Works with:** Salesforce · HubSpot · Slack
+**Hosted product:** [app.leclaw.io](https://app.leclaw.io) — connect HubSpot, run agents, no terminal required
+**Self-hosted:** clone this repo, bring your own keys, run or fork any agent
 
 ---
 
-## Agents
+## Architecture
 
-| Agent | Status | Description |
-|-------|--------|-------------|
-| Le Data Quality | ✅ Live | Scans CRM for missing fields, duplicates, and stale records |
-| Le Plumber | 🔜 Coming Soon | Monitors integration health across your GTM stack |
-| Le Territory Expert | 📋 Roadmap | Detects misrouted accounts and coverage gaps |
-| Le Deal Ops | 📋 Roadmap | Automates Deal Desk approval workflows |
-| Le GTM Analytics | 📋 Roadmap | Funnel instrumentation and KPI monitoring |
+LeClaw uses a French-named multi-agent model:
+
+| Concept | Name | Role |
+|---|---|---|
+| Orchestrator | **Le Directeur** | Dispatches missions, reads rapports, synthesizes insights |
+| Specialist agents | **les agents** | Each owns one CRM domain |
+| Validator | **Le Témoin** | Reviews proposed changes before write-back |
+| Coordinated run | **une mission** | A set of agents dispatched together |
+| Structured result | **un rapport** | Filed by each agent, readable by Le Directeur and other agents |
+| Precise exit | **Le Retrait** | Agent withdraws immediately if stuck, reports exact reason |
+
+Agents share context through rapports. When `le-bdr` runs after `le-data-quality`, it reads the prior rapport and builds on those findings — it does not re-scan.
+
+---
+
+## Agent Library
+
+| Agent | Domain | Status |
+|---|---|---|
+| `le-data-quality` | Field completeness, relationship hygiene | Live |
+| `le-stage-audit` | Deal velocity, pipeline health | Live |
+| `le-duplicates` | Identity resolution | Roadmap |
+| `le-lead-gen` | MQL quality, attribution gaps | Roadmap |
+| `le-bdr` | Follow-up SLA, sequence health | Roadmap |
+| `le-routing` | Assignment gaps, round robin health | Roadmap |
+| `le-forecast` | Commit accuracy, pipeline coverage | Roadmap |
+| `le-deal-desk` | Deal structure, discount hygiene | Roadmap |
+| `le-activities` | Meeting and call logging gaps | Roadmap |
+| `le-renewal` | Renewal risk, upcoming dates | Roadmap |
+| `le-cs` | Health scores, expansion signals | Roadmap |
 
 ---
 
@@ -36,15 +56,148 @@ npm run setup
 npm run data-quality
 ```
 
-`npm run setup` walks you through connecting your CRM, Anthropic API, and Slack in under 3 minutes. All credentials are entered securely (masked input, never logged) and saved to a local `.env` file that never leaves your machine.
+`npm run setup` connects your CRM, Anthropic API key, and Slack in under 3 minutes.
+All credentials are masked on input and saved to `.env` — never committed, never logged.
+
+```bash
+npm run data-quality              # auto-detects CRM from .env
+npm run data-quality -- --crm hubspot
+npm run data-quality -- --crm salesforce
+```
+
+---
+
+## How to Build a Custom Agent
+
+Every LeClaw agent is a list of **checks**. A check is a targeted HubSpot search query that fetches only the broken records matching a specific problem — clean records are never touched.
+
+### 1. Create your agent
+
+```js
+// agents/le-my-agent/index.js
+import { runAgent } from "../../lib/base.js";
+
+export const leMyAgent = {
+  name: "le-my-agent",
+
+  checks: [
+    {
+      id: "missing_phone",
+      label: "Contacts missing phone number",
+      objectType: "contacts",
+
+      // Only fetches contacts where phone is null — never scans the full CRM
+      filterGroups: [
+        { filters: [{ propertyName: "phone", operator: "NOT_HAS_PROPERTY" }] }
+      ],
+
+      properties: ["firstname", "lastname", "email", "phone"],
+      severity: "warning",
+      fix: "Add phone number for outbound sequencing",
+      getName: (r) => r.properties.email || r.id,
+    },
+  ],
+
+  summaryPrompt: (results) => {
+    const total = results.reduce((sum, r) => sum + r.count, 0);
+    return `Summarize this CRM audit in 2 sentences. ${total} issues found across: ${JSON.stringify(results.map(r => ({ label: r.check.label, count: r.count })))}`;
+  },
+};
+
+// Run directly
+runAgent(leMyAgent, { token: process.env.HUBSPOT_API_TOKEN, anthropicKey: process.env.ANTHROPIC_API_KEY });
+```
+
+### 2. Add a script
+
+```json
+"my-agent": "node agents/le-my-agent/index.js"
+```
+
+### Time-based checks
+
+Use a function for timestamp-based checks so the value is computed fresh each run:
+
+```js
+filterGroups: () => [{
+  filters: [{
+    propertyName: "hs_lastmodifieddate",
+    operator: "LT",
+    value: String(Date.now() - 30 * 24 * 60 * 60 * 1000) // 30 days ago
+  }]
+}]
+```
+
+### Relationship checks
+
+Check associations between objects:
+
+```js
+// Contacts with no associated company
+filterGroups: [{ filters: [{ propertyName: "associations.company", operator: "NOT_HAS_PROPERTY" }] }]
+
+// Deals with no associated contact
+filterGroups: [{ filters: [{ propertyName: "associations.contact", operator: "NOT_HAS_PROPERTY" }] }]
+```
+
+### Escalation
+
+A broken record is more critical when it has additional CRM context:
+
+```js
+escalateIf: {
+  description: "has an open deal",
+  filterGroups: [{
+    filters: [
+      { propertyName: "email", operator: "NOT_HAS_PROPERTY" },
+      { propertyName: "associations.deal", operator: "HAS_PROPERTY" }
+    ]
+  }],
+  escalatedSeverity: "critical"
+}
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full agent spec and contribution guide.
+
+---
+
+## Project Structure
+
+```
+leclaw/
+  agents/
+    le-data-quality/      # Field completeness, relationship hygiene
+    le-stage-audit/       # Deal pipeline and velocity
+  core/
+    hubspot.js            # HubSpot API adapter
+    salesforce.js         # Salesforce API adapter
+    slack.js              # Slack delivery
+    ai.js                 # Claude API (cascading model router)
+  lib/
+    base.js               # Agent runner — lifecycle, scoring, Le Retrait
+    hubspot-search.js     # Targeted search — only fetches broken records
+    hubspot-properties.js # Dynamic custom property discovery
+  examples/
+    le-custom-agent/      # Minimal example to fork
+  setup.js                # Interactive setup wizard
+```
+
+---
+
+## Design Principles
+
+1. **Shadow mode by default** — read-only until write-back is explicitly enabled. Never touch the CRM without permission.
+2. **Bring your own keys** — Anthropic API key, CRM credentials. LeClaw pays $0 in AI costs.
+3. **Targeted fetching** — agents search for broken records directly. Clean records are never touched.
+4. **Agents share context** — rapports let downstream agents build on prior findings.
+5. **Le Retrait** — an agent that cannot complete its work exits immediately with a precise reason. No spinning, no silent failures.
+6. **Open source = trust** — read the code. [SECURITY.md](SECURITY.md) documents exactly what data LeClaw accesses and stores.
 
 ---
 
 ## Environment Variables
 
-Set manually or via `npm run setup`:
-
-```
+```bash
 # HubSpot
 HUBSPOT_API_TOKEN=
 
@@ -59,20 +212,20 @@ ANTHROPIC_API_KEY=
 SLACK_WEBHOOK_URL=
 ```
 
-> ⚠️ Never commit your `.env` file. It is gitignored by default.
-> See [SECURITY.md](SECURITY.md) for details on what data LeClaw accesses and stores.
+Run `npm run setup` to configure these interactively.
 
 ---
 
-## Built On
+## Contributing
 
-- [Claude API](https://anthropic.com) — AI summaries and agent reasoning
-- [HubSpot API](https://developers.hubspot.com) — CRM data
-- [Slack Webhooks](https://api.slack.com) — Report delivery
-- [Vercel](https://vercel.com) — Hosting
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
+
+## License
+
+[MIT](LICENSE) — fork it, extend it, build on it.
 
 Built by a Sales Ops practitioner who spent too much time clicking around.
 
-**[leclaw.io](https://leclaw.io) · [LinkedIn](https://www.linkedin.com/company/leclaw/)**
+**[leclaw.io](https://leclaw.io) · [app.leclaw.io](https://app.leclaw.io) · [LinkedIn](https://www.linkedin.com/company/leclaw/)**
