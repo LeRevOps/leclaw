@@ -1,0 +1,38 @@
+name: Update Registry
+
+on:
+  pull_request:
+    paths:
+      - 'agents/**/agent.json'
+
+jobs:
+  update-registry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate registry.json
+        run: node scripts/build-registry.js
+
+      - name: Commit updated registry
+        run: |
+          git config user.name  "leclaw-bot"
+          git config user.email "bot@leclaw.io"
+          git diff --quiet registry.json || (
+            git add registry.json &&
+            git commit -m "chore: regenerate registry.json [skip ci]"
+          )
+
+      - name: Push if changed
+        run: git push origin HEAD:${{ github.head_ref }}
