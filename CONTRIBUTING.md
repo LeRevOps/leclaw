@@ -1,111 +1,236 @@
-# Contributing to LeClaw
+# Contributing an Agent to LeClaw
 
-LeClaw is an open-source RevOps agent framework. Contributions are welcome — especially new agents, CRM adapter improvements, and bug fixes.
+An agent is three things:
 
----
+1. **What to look for** — a list of HubSpot search queries
+2. **What to say about it** — a summary prompt for Claude
+3. **Some metadata** — name, severity, fix suggestion
 
-## Ways to Contribute
+That's it. No framework knowledge required. If you know what "broken" looks like in a RevOps domain, you can write an agent.
 
-- **New agent** — build a specialist agent for a RevOps domain not yet covered
-- **New CRM adapter** — add support for Salesforce, Pipedrive, or other CRMs
-- **Improve an existing agent** — add checks, fix edge cases, improve scoring
-- **Bug fix** — fix something broken
-- **Documentation** — clarify how the framework works
+The best agents come from practitioners who've lived the pain — a BDR manager who knows what SLA failure looks like, a CSM who knows renewal risk signals, a RevOps analyst who's been burned by bad forecast data. Your domain knowledge is what makes LeClaw accurate.
 
 ---
 
-## Building a New Agent
+## Before you start
 
-Every agent follows the same pattern. Read `agents/le-data-quality/` as the reference implementation.
-
-### Agent spec
-
-An agent exports an object conforming to `AgentDefinition`:
-
-```js
-{
-  name: string,           // kebab-case, prefixed with "le-": "le-my-agent"
-  checks: AgentCheck[],   // array of check definitions (see below)
-  discoverChecks?: async (token) => AgentCheck[],  // optional: runtime-discovered checks
-  summaryPrompt: (results) => string,  // builds the prompt sent to Claude
-}
+```bash
+git clone https://github.com/LeRevOps/leclaw.git
+cd leclaw
+npm install
+cp .env.example .env   # add your HUBSPOT_TOKEN and ANTHROPIC_API_KEY
 ```
 
-### Check spec
+---
 
-A check fetches only the broken records matching a specific problem:
+## Step 1 — Name your agent
 
-```js
-{
-  id: string,                    // snake_case: "missing_email"
-  label: string,                 // human-readable: "Contacts missing email"
-  objectType: string,            // "contacts" | "companies" | "deals" | "tickets"
-  filterGroups: FilterGroup[] | () => FilterGroup[],  // what makes a record "broken"
-  properties: string[],          // HubSpot property names to fetch on matching records
-  severity: "critical" | "warning" | "info",
-  fix: string,                   // actionable fix suggestion shown to the user
-  getName: (record) => string,   // how to get a display name from the record
+Agents follow the `le-[domain]` pattern:
 
-  // Optional: escalate severity when broken record also matches additional context
-  escalateIf?: {
-    description: string,
-    filterGroups: FilterGroup[] | () => FilterGroup[],
-    escalatedSeverity: "critical" | "warning",
-  },
+| Agent | Domain |
+|-------|--------|
+| `le-data-quality` | CRM field completeness |
+| `le-stage-audit` | Pipeline health |
+| `le-bdr` | BDR follow-up accountability |
+| `le-renewal` | Renewal risk |
+| `le-forecast` | Forecast integrity |
 
-  // Optional: describe how this issue would be auto-fixed (write-back tier)
-  writeback?: {
-    description: string,
-    requiresApproval: boolean,
-    automated: boolean,
-  },
-}
+Pick a name. Create the folder:
+
+```bash
+mkdir agents/le-my-agent
+touch agents/le-my-agent/index.ts
 ```
 
-### Naming conventions
+---
 
-- Agent names: `le-{domain}` — `le-routing`, `le-forecast`, `le-bdr`
-- Check IDs: `{object}_{problem}` — `missing_email`, `no_company_association`, `deal_stuck_30_days`
-- Severity guidelines:
-  - `critical` — blocks revenue or corrupts data (missing email on a deal contact, duplicate records)
-  - `warning` — degrades reporting or workflow quality (missing company association, no close date)
-  - `info` — nice to have, segmentation or enrichment gap (missing industry, missing job title)
+## Step 2 — Write your checks
 
-### Checklist before submitting
+Each check answers one question: **"How many records have this specific problem?"**
 
-- [ ] Agent name starts with `le-` and is kebab-case
-- [ ] All checks use `NOT_HAS_PROPERTY` / `HAS_PROPERTY` filters — no full CRM scans
-- [ ] Time-based checks use a function for `filterGroups` (not a hardcoded timestamp)
-- [ ] `getName` returns a human-readable string, not just an ID
-- [ ] `fix` is actionable — describes what to do, not just what's wrong
-- [ ] `summaryPrompt` gives Claude only counts and labels — no raw records
-- [ ] Agent is added to the agent table in `README.md`
-- [ ] Script added to `package.json`
+Copy this template into `agents/le-my-agent/index.ts` and fill in your domain knowledge:
+
+```typescript
+import type { AgentDefinition, AgentCheck } from "../../core/base.js";
+
+const checks: AgentCheck[] = [
+
+  {
+    id: "my_check_id",                       // unique, snake_case
+    label: "Deals missing close date",       // shown in reports and Slack
+    objectType: "deals",                     // contacts | companies | deals
+    filterGroups: [
+      {
+        filters: [
+          {
+            propertyName: "closedate",       // HubSpot property API name
+            operator: "NOT_HAS_PROPERTY",    // see operators below
+          },
+        ],
+      },
+    ],
+    properties: ["dealname", "amount", "dealstage"],  // fields to fetch for context
+    severity: "critical",                    // critical | warning | info
+    fix: "Add a close date — required for accurate forecasting",
+    getName: (r) => r.properties.dealname || r.id,
+  },
+
+];
+
+export const leMyAgent: AgentDefinition = {
+  name: "le-my-agent",
+  checks,
+
+  summaryPrompt: (results) => {
+    const lines = results
+      .filter((r) => r.count > 0)
+      .map((r) => `- ${r.check.label}: ${r.count} records`)
+      .join("\n");
+
+    return `You are Le My Agent, a RevOps agent. Summarize these issues in 2-3 sentences.
+Focus on business impact. Be direct. No bullet points.
+
+Issues found:
+${lines || "No issues found."}`;
+  },
+};
+```
 
 ---
 
-## Submitting a PR
+## Operators
 
-1. Fork the repo
-2. Create a branch: `git checkout -b agent/le-my-agent`
-3. Build your agent following the spec above
-4. Test it against a real HubSpot instance (or use the mock in `examples/`)
-5. Open a PR with:
-   - What the agent checks and why
-   - Which HubSpot object types it touches
-   - Example output
+| Operator | Meaning |
+|----------|---------|
+| `NOT_HAS_PROPERTY` | Field is empty / missing |
+| `HAS_PROPERTY` | Field has any value |
+| `EQ` | Equals a value — add `value: "something"` |
+| `NEQ` | Does not equal |
+| `LT` | Less than (use millisecond timestamps for dates) |
+| `GT` | Greater than |
+| `CONTAINS_TOKEN` | String contains |
+
+**Date check** — records not modified in 30 days:
+```typescript
+filterGroups: () => [
+  {
+    filters: [
+      {
+        propertyName: "hs_lastmodifieddate",
+        operator: "LT",
+        value: String(Date.now() - 30 * 24 * 60 * 60 * 1000),
+      },
+    ],
+  },
+],
+```
+
+**Multiple conditions** — filters inside the same `{}` are AND. Separate `{}` objects are OR:
+```typescript
+filterGroups: [
+  // Deal is in Proposal with no amount
+  {
+    filters: [
+      { propertyName: "dealstage", operator: "EQ", value: "presentationscheduled" },
+      { propertyName: "amount",    operator: "NOT_HAS_PROPERTY" },
+    ],
+  },
+  // OR: Deal is in Commit with no close date
+  {
+    filters: [
+      { propertyName: "dealstage", operator: "EQ", value: "decisionmakerboughtin" },
+      { propertyName: "closedate", operator: "NOT_HAS_PROPERTY" },
+    ],
+  },
+],
+```
 
 ---
 
-## Code Style
+## Step 3 — Register your agent
 
-- ES modules (`import`/`export`)
-- No TypeScript required for agents — plain JS is fine
-- No external dependencies beyond what's in `package.json`
-- Comments on non-obvious logic only
+Open `core/registry.ts` and add two lines:
+
+```typescript
+import { leMyAgent } from "../agents/le-my-agent/index.js";  // ← add import
+
+export const agentRegistry: Record<string, AgentDefinition> = {
+  "le-data-quality": leDataQuality,
+  "le-stage-audit":  leStageAudit,
+  "le-my-agent":     leMyAgent,   // ← add here
+};
+```
+
+---
+
+## Step 4 — Test it
+
+```bash
+npm run build
+npx leclaw
+```
+
+Ask Le Directeur about your domain. If records come back flagged, the checks are working.
+
+---
+
+## Step 5 — Open a PR
+
+```bash
+git checkout -b agent/le-my-agent
+git add agents/le-my-agent/ core/registry.ts
+git commit -m "feat: add le-my-agent — [one line description]"
+git push origin agent/le-my-agent
+```
+
+In the PR description, include:
+
+- **What domain this covers** — one sentence
+- **What "broken" looks like** — what each check detects and why it matters in practice
+- **Your background** — optional, but we love knowing the practitioner behind the agent
+- **CRM tested on** — HubSpot (Salesforce adapter coming)
+
+---
+
+## Severity guide
+
+| Severity | Use when |
+|----------|----------|
+| `critical` | Directly breaks revenue: lost leads, wrong forecast, broken routing |
+| `warning` | Degrades accuracy or efficiency over time |
+| `info` | Nice to have — segmentation, enrichment, reporting quality |
+
+When in doubt: if a CRO would ask about it in a QBR, it's `critical`.
+
+---
+
+## What makes a good agent
+
+**Good** — specific, deterministic, encodes real practitioner knowledge:
+> "MQLs with no activity for 48 hours" — a BDR manager knows this is the exact SLA gap that kills pipeline
+
+**Less useful** — broad or already covered by HubSpot's built-in reports:
+> "Contacts missing some fields" — too generic to act on
+
+**Good** — catches problems before they become visible to leadership:
+> "Deals in Commit with no close date" — catches forecast inflation before the CRO sees it
+
+**Less useful** — retroactive cleanup that doesn't affect current operations.
+
+---
+
+## Don't know TypeScript? Still want to contribute?
+
+Open an issue describing:
+- The domain (BDR accountability, renewal risk, commission hygiene, etc.)
+- What "broken" looks like in your CRM — be specific
+- How often your team currently catches this manually
+
+That's enough. We'll turn it into an agent and credit you. Your domain knowledge is the hard part.
 
 ---
 
 ## Questions
 
-Open an issue or start a discussion on GitHub.
+- [Open an issue](https://github.com/LeRevOps/leclaw/issues)
+- [hello@leclaw.io](mailto:hello@leclaw.io)
