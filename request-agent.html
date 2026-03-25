@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request an Agent — LeClaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080E14; --bg-card: #0C1620; --sky: #7EC8E3;
+      --green: #4ADE80; --white: #EEF2F6; --muted: #8899AA;
+      --border: rgba(126,200,227,0.12); --border-sm: rgba(255,255,255,0.06);
+    }
+    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: radial-gradient(circle, rgba(126,200,227,0.06) 1px, transparent 1px);
+      background-size: 32px 32px; pointer-events: none; z-index: 0;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      background: rgba(8,14,20,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-sm);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-wordmark { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; }
+    .nav-wordmark .le { color: var(--sky); }
+    .nav-wordmark .claw { color: var(--white); }
+    main { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: 120px 40px 80px; }
+    .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky); margin-bottom: 16px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; margin-bottom: 12px; }
+    .subtitle { color: var(--muted); margin-bottom: 12px; }
+    .note { font-size: 13px; color: var(--muted); background: rgba(126,200,227,0.05); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin-bottom: 40px; line-height: 1.6; }
+    .note strong { color: var(--white); }
+    .form-group { margin-bottom: 24px; }
+    label { display: block; font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
+    .label-hint { font-weight: 400; color: var(--muted); margin-left: 6px; }
+    input, textarea, select {
+      width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 12px 16px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 15px; outline: none;
+      transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--sky); }
+    textarea { resize: vertical; min-height: 100px; }
+    select option { background: var(--bg-card); }
+    .checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+    .checkbox-label { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); cursor: pointer; }
+    .checkbox-label input[type="checkbox"] { width: auto; accent-color: var(--sky); }
+    .btn {
+      display: inline-block; padding: 12px 28px; border-radius: 8px;
+      font-size: 15px; font-weight: 500; cursor: pointer; border: none;
+      background: var(--sky); color: #080E14; transition: opacity 0.15s;
+      width: 100%; text-align: center;
+    }
+    .btn:hover { opacity: 0.88; }
+    .divider { border: none; border-top: 1px solid var(--border-sm); margin: 40px 0; }
+    .contribute { font-size: 14px; color: var(--muted); }
+    .contribute a { color: var(--sky); text-decoration: none; }
+    .contribute a:hover { text-decoration: underline; }
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--border-sm); padding: 32px 40px; text-align: center; }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-copy { font-size: 12px; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <span class="nav-wordmark"><span class="le">Le</span><span class="claw">Claw</span></span>
+    </a>
+  </nav>
+
+  <main>
+    <div class="label">// build the team</div>
+    <h1>Request an Agent</h1>
+    <p class="subtitle">Tell us what your RevOps team checks manually every week. We'll build an agent for it.</p>
+    <div class="note">
+      <strong>Every submission shapes the roadmap.</strong> The best agent requests come from practitioners who've lived the pain — a BDR manager who knows what SLA failure looks like, a CSM who knows renewal risk signals. Your domain knowledge is what makes LeClaw accurate.
+    </div>
+
+    <form action="https://formspree.io/f/REPLACE_WITH_AGENT_REQUEST_FORM_ID" method="POST">
+      <div class="form-group">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Work email</label>
+        <input type="email" id="email" name="email" placeholder="you@company.com" required />
+      </div>
+      <div class="form-group">
+        <label for="role">Your role <span class="label-hint">— helps us understand the context</span></label>
+        <select id="role" name="role">
+          <option value="">Select your role</option>
+          <option value="head-of-revops">Head of RevOps</option>
+          <option value="revops-manager">RevOps Manager</option>
+          <option value="vp-sales-ops">VP Sales Ops</option>
+          <option value="sales-ops-analyst">Sales Ops Analyst</option>
+          <option value="gtm-engineer">GTM Engineer</option>
+          <option value="vp-sales">VP Sales / CRO</option>
+          <option value="bdr-manager">BDR / SDR Manager</option>
+          <option value="csm">Customer Success</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="crm">CRM</label>
+        <select id="crm" name="crm">
+          <option value="">Select your CRM</option>
+          <option value="hubspot">HubSpot</option>
+          <option value="salesforce">Salesforce</option>
+          <option value="both">Both</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="domain">What domain should the agent cover? <span class="label-hint">— e.g. "BDR follow-up", "renewal risk", "territory coverage"</span></label>
+        <input type="text" id="domain" name="domain" placeholder="e.g. Forecast accuracy, renewal risk, commission hygiene..." required />
+      </div>
+      <div class="form-group">
+        <label for="broken">What does "broken" look like in this domain? <span class="label-hint">— be specific</span></label>
+        <textarea id="broken" name="broken" placeholder="e.g. An MQL with no activity for 48 hours. A deal in Commit with no close date. A contact enrolled in a sequence after a hard bounce..." required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="frequency">How often does your team currently check this manually?</label>
+        <select id="frequency" name="frequency">
+          <option value="">Select frequency</option>
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="before-qbr">Before every QBR</option>
+          <option value="when-something-breaks">Only when something breaks</option>
+          <option value="never">We don't — that's the problem</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>I'm interested in <span class="label-hint">— select all that apply</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-label"><input type="checkbox" name="interest" value="dashboard" /> Using the hosted dashboard when this agent is live</label>
+          <label class="checkbox-label"><input type="checkbox" name="interest" value="beta" /> Being a beta tester for this agent</label>
+          <label class="checkbox-label"><input type="checkbox" name="interest" value="contribute" /> Contributing the agent myself (open source)</label>
+          <label class="checkbox-label"><input type="checkbox" name="interest" value="notify" /> Just notify me when it ships</label>
+        </div>
+      </div>
+      <button type="submit" class="btn">Submit request →</button>
+    </form>
+
+    <hr class="divider" />
+
+    <p class="contribute">
+      Want to build it yourself? LeClaw is open source and MIT licensed.<br/>
+      An agent is a list of CRM search queries + a summary prompt — no deep TypeScript required.<br/><br/>
+      <a href="https://github.com/LeRevOps/leclaw/blob/master/CONTRIBUTING.md" target="_blank">Read the contributing guide →</a>
+    </p>
+  </main>
+
+  <footer>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/privacy.html">Privacy</a></li>
+      <li><a href="/terms.html">Terms</a></li>
+      <li><a href="/security.html">Security</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+      <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 LeClaw. Your RevOps team. Runs 24/7.</p>
+  </footer>
+
+</body>
+</html>
