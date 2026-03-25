@@ -35,6 +35,8 @@ Every feature decision, every architecture choice, every session should move tow
 
 **ICP:** Any B2B company with a sales team and a CRM. Primary: Head of RevOps / VP Sales Ops at Series B–C SaaS, $10–50M ARR. Secondary: pre-RevOps-hire companies ($149/mo vs $180k/yr for a RevOps hire).
 
+**Open source and forkable by design.** The framework is MIT licensed. GTM engineers and RevOps practitioners can clone it, run it against their own CRM, fork it, and contribute agents back. This is the community flywheel — domain knowledge from practitioners who lived the pain, encoded into agents, running in hundreds of CRMs. The open source repo is the top of funnel. The hosted dashboard is the monetization layer.
+
 **Live at:** https://leclaw.io
 **Dashboard:** https://app.leclaw.io (leclaw-app repo)
 **npm:** `@leclaw/core` (current version: 0.3.5)
@@ -43,15 +45,42 @@ Every feature decision, every architecture choice, every session should move tow
 
 ---
 
-## Two Repos — Know Which One You're In
+## Two Repos — Two Different Users, One Framework
 
-| Repo | Path | Purpose |
-|------|------|---------|
-| `leclaw` | `C:\Users\Benjamin\leclaw` | Open source framework + CLI (`@leclaw/core` on npm) |
-| `leclaw-app` | `C:\Users\Benjamin\leclaw-app` | Hosted SaaS dashboard (app.leclaw.io) — Next.js + Supabase |
+| Repo | Path | Purpose | Users |
+|------|------|---------|-------|
+| `leclaw` | `C:\Users\Benjamin\leclaw` | Open source framework + CLI (`@leclaw/core` on npm) | GTM engineers, developers, contributors |
+| `leclaw-app` | `C:\Users\Benjamin\leclaw-app` | Hosted SaaS dashboard (app.leclaw.io) — Next.js + Supabase | RevOps managers, non-technical users |
 
 **This CLAUDE.md is for the `leclaw` repo (open source framework).**
 The `leclaw-app` repo has its own CLAUDE.md.
+
+### Why two repos
+
+The same `@leclaw/core` framework powers both. The split is intentional — open core business model, same as Supabase, PostHog, Metabase.
+
+- **`leclaw` (public, MIT)** — anyone can clone, fork, run agents against their own CRM, contribute new agents. This is the community and the top of funnel. Developers find it on GitHub, GTM engineers fork it, companies evaluate it. No terminal skills required for basic use (`npx leclaw`).
+- **`leclaw-app` (private)** — the hosted product. Supabase auth, billing, multi-tenancy, dashboard UI. Contains secrets, business logic, and infrastructure config. Never public.
+
+### Execution architecture — two flows, one framework
+
+```
+DEVELOPER / GTM ENGINEER (open source)        NON-TECHNICAL REVOPS (hosted dashboard)
+────────────────────────────────────           ────────────────────────────────────────
+npx leclaw                                     app.leclaw.io
+  └── Le Directeur REPL                          └── clicks "Run Mission"
+        └── routeQuestion()                            └── Next.js API route (Vercel)
+        └── Docker available?                                └── runAgentForOrg()
+              YES → runAgentInDocker()                             └── runAgent() ← @leclaw/core
+                     └── docker run --rm                                └── HubSpot API
+                           └── agent-runner.js                    └── onIssue() → Supabase
+                                 └── runAgent() ← @leclaw/core    └── Slack delivery
+              NO  → runAgent() ← @leclaw/core
+```
+
+**Docker is CLI-only.** Vercel serverless cannot run containers. Dashboard users get Vercel's own ephemeral isolation — sufficient because they only run LeClaw's vetted agents, never custom code. Docker matters for developers because they may run custom or third-party agents on their own machine. Resource-limited to 512MB RAM, 0.5 CPU, removed on exit. Falls back to in-process automatically if Docker is unavailable.
+
+**Key insight:** The `leclaw-app` dashboard is the delivery mechanism for the agent library to non-technical users. The open source CLI is the delivery mechanism for developers and contributors. Same agents, different runtime targets.
 
 ---
 
@@ -193,6 +222,28 @@ leclaw/
 - Python/SQL background
 - Targeting GTM Engineer roles ($175k+)
 - LeClaw: portfolio project + potential product
+
+---
+
+## Major Decisions (March 2026)
+
+These are architectural and strategic decisions made in prior sessions. Do not relitigate them.
+
+### Docker for CLI (not dashboard)
+Added Docker container isolation to the CLI in v0.3.5. Each agent runs in its own container (`leclaw/runner:0.3.5`) — 512MB RAM, 0.5 CPU, removed on exit, no host filesystem access. Credentials passed as env vars. Falls back to in-process if Docker unavailable.
+
+**Why CLI only:** Vercel serverless can't run containers. Dashboard users only run LeClaw's vetted agents — Vercel's ephemeral isolation is sufficient. Docker matters for developers running custom/third-party agents on their own machine. Benjamin works at Docker — this is deliberate product alignment.
+
+**What's missing:** Credential proxy (credentials currently passed as env vars, visible in `docker inspect`). Post-MVP.
+
+### Open core split
+`leclaw` is public MIT. `leclaw-app` is private. Same `@leclaw/core` framework powers both. leclaw-app previously duplicated ~900 lines of framework code — refactored in March 2026 to import from npm. `lib/agents/runner.ts` (75 lines) is the only app-layer addition — Supabase persistence wrapper around core's `runAgent()`.
+
+### Async execution (March 2026)
+Dashboard API routes previously waited synchronously for agent completion — would time out on large HubSpot portals (Vercel 60s limit). Fixed using Next.js `after()`: routes return `{ run_id }` immediately, agent runs in background, client polls `/api/runs/[runId]` every 2s. `maxDuration` raised to 300s.
+
+### The mission
+Decided: LeClaw is not a CRM audit tool. It is a RevOps team that runs 24/7. Two agents is a proof of concept. Ten agents is a RevOps team. Every session moves toward the agent library goal.
 
 ---
 
