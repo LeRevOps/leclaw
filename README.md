@@ -54,15 +54,22 @@ Agents: le-stage-audit (54/100) · le-data-quality (61/100)
 
 ## Quick Start
 
-```bash
-# No install needed — run against your HubSpot portal now
-npx leclaw
+**Not a developer?** No terminal required — use the hosted dashboard:
+→ **[app.leclaw.io](https://app.leclaw.io)** — connect HubSpot, run agents, done.
 
-# Or set up for the first time (connects HubSpot + Anthropic, writes .env)
+**Developer or self-hosted:**
+
+Requires Node.js 18+, a [HubSpot Private App token](https://developers.hubspot.com/docs/api/private-apps), and an [Anthropic API key](https://console.anthropic.com/settings/keys).
+
+```bash
+# First time — connects HubSpot + Anthropic, writes .env, launches CLI
 npx leclaw setup
+
+# Already configured
+npx leclaw
 ```
 
-Requires `HUBSPOT_TOKEN` and `ANTHROPIC_API_KEY`. Run `npx leclaw setup` to configure both interactively — it opens the right pages in your browser, verifies the connections, and writes your `.env`.
+`npx leclaw setup` opens the right pages in your browser, verifies each connection, and writes your `.env` automatically.
 
 ---
 
@@ -72,7 +79,9 @@ Requires `HUBSPOT_TOKEN` and `ANTHROPIC_API_KEY`. Run `npx leclaw setup` to conf
 |---|---|---|
 | `le-data-quality` | Field completeness, relationship hygiene | ✅ Live |
 | `le-stage-audit` | Deal velocity, pipeline health | ✅ Live |
-| `le-bdr` | Follow-up SLA, sequence health | 🔜 Next |
+| `le-bdr` | Follow-up SLA, unworked MQLs, bounce hygiene | ✅ Live |
+| `le-activities` | Dark deals, missing next steps, engagement gaps | ✅ Live |
+| `le-deal-review` | Pre-meeting deal intelligence, close date hygiene | ✅ Live |
 | `le-forecast` | Commit accuracy, pipeline coverage | 🔜 Next |
 | `le-plumber` | Assignment gaps, routing health | Roadmap |
 | `le-duplicates` | Identity resolution | Roadmap |
