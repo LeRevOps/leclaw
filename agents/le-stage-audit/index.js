@@ -104,6 +104,17 @@ const checks = [
         severity: "warning",
         fix: "Update the close date or mark this deal as closed lost — stale close dates distort forecast",
         getName: (r) => r.properties.dealname || r.id,
+        writeback: {
+            description: "Mark deal as closed lost",
+            requiresApproval: true,
+            automated: false,
+        },
+        applyFix: (record) => ({
+            objectType: "deals",
+            objectId: record.id,
+            properties: { dealstage: "closedlost" },
+            description: `Mark "${record.properties.dealname || record.id}" as closed lost (close date passed)`,
+        }),
     },
 ];
 export const leStageAudit = {

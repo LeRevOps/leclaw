@@ -13,11 +13,14 @@ export type {
   Rapport,
   Issue,
   OrgConfig,
+  WritebackPatch,
   HubSpotRecord,
   HubSpotFilterGroup,
 } from "./base.js";
 
 export { searchHubSpot } from "./hubspot-search.js";
+export { applyPatch, applyBatch } from "./hubspot-write.js";
+export type { WritebackResult } from "./hubspot-write.js";
 export type { HubSpotFilter } from "./hubspot-search.js";
 
 export { buildDynamicChecks, fetchCustomProperties } from "./hubspot-properties.js";

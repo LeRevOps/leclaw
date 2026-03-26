@@ -42,6 +42,7 @@ export async function runAgent(agent, options) {
                 if (samples.length < 20)
                     samples.push({ id: record.id, name });
                 if (onIssue) {
+                    const writebackPatch = check.applyFix ? (check.applyFix(record) ?? undefined) : undefined;
                     await onIssue({
                         objectType: check.objectType,
                         objectId: record.id,
@@ -49,6 +50,7 @@ export async function runAgent(agent, options) {
                         severity: check.severity,
                         issueType: check.id,
                         fixSuggestion: check.fix,
+                        writebackPatch,
                     });
                 }
             }

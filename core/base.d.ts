@@ -20,6 +20,18 @@
  */
 import { HubSpotFilterGroup, HubSpotRecord } from "./hubspot-search.js";
 export type { HubSpotRecord, HubSpotFilterGroup };
+/**
+ * A proposed write-back patch for a single broken record.
+ * Returned by AgentCheck.applyFix() — passed to the CRM adapter for execution.
+ */
+export interface WritebackPatch {
+    objectType: string;
+    objectId: string;
+    /** HubSpot property name → value. For Salesforce, same shape — adapter maps field names. */
+    properties: Record<string, string>;
+    /** Human-readable description of what this patch does, shown in the approval UI */
+    description: string;
+}
 export interface Issue {
     objectType: string;
     objectId: string;
@@ -29,6 +41,12 @@ export interface Issue {
     fixSuggestion: string;
     /** Specific next action for the rep or RevOps team — more actionable than fixSuggestion */
     nextAction?: string;
+    /**
+     * Pre-computed write-back patch for this record.
+     * Present only when the check defines applyFix() and it returns a non-null patch.
+     * The app layer stores this and queues it for Le Témoin approval.
+     */
+    writebackPatch?: WritebackPatch;
 }
 export interface CheckResult {
     check: AgentCheck;
@@ -104,6 +122,22 @@ export interface AgentCheck {
         requiresApproval: boolean;
         automated: boolean;
     };
+    /**
+     * Returns the CRM patch to apply for a broken record.
+     * Only implement for checks where the fix value is deterministic
+     * (e.g. mark closed lost, assign default owner, update status).
+     *
+     * If null is returned, the record is queued for manual review instead.
+     *
+     * @example
+     * applyFix: (record) => ({
+     *   objectType: "deals",
+     *   objectId: record.id,
+     *   properties: { dealstage: "closedlost" },
+     *   description: `Mark "${record.properties.dealname}" as closed lost`,
+     * })
+     */
+    applyFix?: (record: HubSpotRecord) => WritebackPatch | null;
     /**
      * Salesforce equivalent of this check.
      * Not executed until the Salesforce adapter ships — serves as the

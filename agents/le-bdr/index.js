@@ -95,6 +95,11 @@ function buildChecks(cfg) {
                 soql: `Status = 'MQL' AND OwnerId = null`,
                 fields: ["Id", "Name", "Email", "CreatedDate", "Status"],
             },
+            writeback: {
+                description: "Assign to default BDR owner or round-robin queue",
+                requiresApproval: true,
+                automated: false,
+            },
         },
         // ── SQL stalled in early stage ───────────────────────────────────────────
         {

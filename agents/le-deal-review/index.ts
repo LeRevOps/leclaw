@@ -176,6 +176,17 @@ function buildChecks(cfg: OrgConfig): AgentCheck[] {
         soql: `IsClosed = false AND CloseDate < TODAY`,
         fields: ["Id", "Name", "Amount", "StageName", "OwnerId", "CloseDate"],
       },
+      writeback: {
+        description: "Mark deal as closed lost",
+        requiresApproval: true,
+        automated: false,
+      },
+      applyFix: (record) => ({
+        objectType: "deals",
+        objectId: record.id,
+        properties: { dealstage: "closedlost" },
+        description: `Mark "${record.properties.dealname || record.id}" as closed lost (close date passed)`,
+      }),
     },
 
     // ── Deals with no associated contact — flying blind ──────────────────────

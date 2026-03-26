@@ -20,5 +20,23 @@ export interface SynthesisPlan {
     areasToInspect: string[];
     successCriteria: string;
 }
-export declare function buildSynthesisPrompt(question: string, rapports: RapportSummary[], plan?: SynthesisPlan): string;
+export interface AgentRunHistory {
+    agentName: string;
+    /** Last up to 5 completed runs, oldest first */
+    runs: Array<{
+        score: number;
+        date: string;
+    }>;
+    trend: "improving" | "declining" | "stable" | "new";
+}
+export type RunHistory = AgentRunHistory[];
+/** Build RunHistory from raw Supabase rows, grouped by agent */
+export declare function buildRunHistory(rows: Array<{
+    agent_name: string;
+    score: number;
+    created_at: string;
+}>, 
+/** Exclude these run IDs (the current run) — pass agent names instead */
+excludeAgentNames?: Set<string>): RunHistory;
+export declare function buildSynthesisPrompt(question: string, rapports: RapportSummary[], plan?: SynthesisPlan, history?: RunHistory): string;
 export declare function buildSynthesisPromptNoData(question: string): string;
