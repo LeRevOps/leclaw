@@ -6,13 +6,13 @@ Read this at the start of every session. This is the single source of truth for 
 
 ## What LeClaw Is
 
-**LeClaw is a RevOps team that runs 24/7 and never misses a QBR.**
+**LeClaw is the open-source GTM agent hub.**
 
-Not a tool that helps your RevOps team. A system that automates the entire operational layer of revenue operations — the 60% of RevOps work that is repeatable, processable, and should never require a human to do manually.
+The canonical collection of revenue operations agents — community-built, CRM-native, deployable in two minutes. Think OpenClaw for CRMs and RevOps: a hub where practitioners encode domain knowledge as agents, and Le Directeur is the orchestrator that deploys any of them against your stack.
 
-Every agent encodes what "broken" looks like in a specific RevOps domain. Two agents is a proof of concept. Ten agents is a RevOps team. The value compounds with every agent shipped or contributed.
+This is not a tool that helps your RevOps team. It is the infrastructure for an autonomous RevOps layer — every repeatable, processable task that should never require a human to do manually.
 
-**The central mission: build the agent library until LeClaw covers the full revenue motion.**
+**The hub is the product. Le Directeur is the orchestrator.**
 
 ```
 Data quality audits       → Le Data Quality    ✅
@@ -24,22 +24,22 @@ Territory coverage        → Le Territory       📋
 Renewal risk              → Le Renewal         📋
 Commission accuracy       → Le Commission      📋
 QBR prep                  → Le QBR             📋
-Write-back / fixing       → Le Témoin          📋
+Write-back / fixing       → Le Témoin          ✅ (app layer)
 ```
 
 Every feature decision, every architecture choice, every session should move toward this. If it doesn't add agents, enable the community to add agents, or make existing agents run better — deprioritize it.
 
-**The community flywheel:** LeClaw's moat is encoded domain knowledge from RevOps practitioners. The framework makes it easy to contribute an agent (a list of filterGroups checks + a summary prompt). A BDR manager knows what SLA failure looks like. A CSM knows renewal risk. They don't need to be engineers — they need a simple enough pattern to contribute their knowledge. Every new agent from the community is institutional RevOps knowledge that runs in hundreds of CRMs.
+**The community flywheel:** LeClaw's moat is encoded domain knowledge from RevOps practitioners. A BDR manager knows what SLA failure looks like. A CSM knows renewal risk. The framework makes it easy to contribute an agent (filterGroups checks + a summary prompt) — they don't need to be engineers. Every contributed agent is institutional RevOps knowledge that runs in hundreds of CRMs.
 
-**Positioning:** "Native agents are features inside a single product. LeClaw is a RevOps team across your entire GTM stack."
+**Positioning:** "Native agents are features inside a single product. LeClaw is the open-source GTM agent hub — agents for every domain, deployable against any CRM."
 
-**ICP:** Any B2B company with a sales team and a CRM. Primary: Head of RevOps / VP Sales Ops at Series B–C SaaS, $10–50M ARR. Secondary: pre-RevOps-hire companies ($149/mo vs $180k/yr for a RevOps hire).
+**ICP:** Any B2B company with a sales team and a CRM. Primary: Head of RevOps / VP Sales Ops at Series B–C SaaS, $10–50M ARR. Secondary: GTM engineers and RevOps practitioners who want to encode their own domain knowledge and contribute to the hub.
 
-**Open source and forkable by design.** The framework is MIT licensed. GTM engineers and RevOps practitioners can clone it, run it against their own CRM, fork it, and contribute agents back. This is the community flywheel — domain knowledge from practitioners who lived the pain, encoded into agents, running in hundreds of CRMs. The open source repo is the top of funnel. The hosted dashboard is the monetization layer.
+**Open source and forkable by design.** The framework is MIT licensed. GTM engineers can clone it, run it against their own CRM, fork it, and contribute agents back. The open source repo is the top of funnel. The hosted dashboard is the monetization layer.
 
 **Live at:** https://leclaw.io
 **Dashboard:** https://app.leclaw.io (leclaw-app repo)
-**npm:** `@leclaw/core` (current version: 0.3.5)
+**npm:** `@leclaw/core` (current version: 0.3.6)
 **GitHub:** https://github.com/LeRevOps/leclaw
 **Stack:** Node.js, TypeScript, Claude API, HubSpot API, Slack API, Vercel, Supabase
 
