@@ -293,6 +293,127 @@
       color: rgba(136,153,170,0.5);
     }
 
+    /* ── LOGIC PANEL ── */
+    .logic-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--sky);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: opacity 0.15s;
+      text-decoration: none;
+    }
+    .logic-toggle:hover { opacity: 0.75; }
+
+    .logic-panel {
+      display: none;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-sm);
+    }
+    .logic-panel.open { display: block; }
+
+    .check-item {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .check-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .check-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .check-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--sky);
+    }
+
+    .severity-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      padding: 1px 6px;
+      border-radius: 3px;
+    }
+    .sev-critical { background: rgba(248,113,113,0.1); color: #F87171; }
+    .sev-warning  { background: rgba(251,191,36,0.1);  color: #FBBF24; }
+    .sev-info     { background: rgba(126,200,227,0.08); color: var(--sky); }
+
+    .check-why {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .check-filter {
+      background: #050B10;
+      border: 1px solid var(--border-sm);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: #8BB8C8;
+      overflow-x: auto;
+      white-space: pre;
+      margin-bottom: 6px;
+    }
+
+    .check-fix {
+      font-size: 11px;
+      color: rgba(74,222,128,0.8);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .fork-block {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: rgba(126,200,227,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .fork-block p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .fork-btns {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .fork-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+    .fork-btn-primary { background: rgba(126,200,227,0.1); color: var(--sky); border: 1px solid var(--border); }
+    .fork-btn-primary:hover { background: rgba(126,200,227,0.18); }
+    .fork-btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-sm); }
+    .fork-btn-ghost:hover { color: var(--white); }
+
     /* ── CONTRIBUTE CTA ── */
     .contribute-cta {
       border-top: 1px solid var(--border-sm);
@@ -439,7 +560,7 @@
       <li><a href="/contact.html">Contact</a></li>
       <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
     </ul>
-    <p class="footer-copy">© 2026 LeClaw. Your RevOps team. Runs 24/7.</p>
+    <p class="footer-copy">© 2026 LeClaw. The open-source GTM agent hub.</p>
   </footer>
 
   <script>
@@ -485,6 +606,27 @@
       return allAgents;
     }
 
+    function severityClass(s) {
+      return s === 'critical' ? 'sev-critical' : s === 'warning' ? 'sev-warning' : 'sev-info';
+    }
+
+    function renderChecks(checks) {
+      if (!checks || checks.length === 0) return '';
+      return checks.map(c => `
+        <div class="check-item">
+          <div class="check-header">
+            <span class="check-id">${c.id}</span>
+            <span class="severity-badge ${severityClass(c.severity)}">${c.severity}</span>
+            ${c.writeback ? `<span class="severity-badge" style="background:rgba(251,191,36,0.08);color:#FBBF24;">write-back</span>` : ''}
+          </div>
+          ${c.why ? `<p class="check-why">${c.why}</p>` : ''}
+          <div class="check-filter">${JSON.stringify(c.filterGroups, null, 2)}</div>
+          ${c.note ? `<p class="check-why" style="color:rgba(136,153,170,0.5);font-size:10px;">ℹ ${c.note}</p>` : ''}
+          <p class="check-fix">→ ${c.fix}</p>
+        </div>
+      `).join('');
+    }
+
     function renderGrid(agents) {
       const grid = document.getElementById('agent-grid');
 
@@ -493,9 +635,10 @@
         return;
       }
 
-      grid.innerHTML = agents.map(agent => {
+      grid.innerHTML = agents.map((agent, idx) => {
         const isLive = agent.status === 'live' || agent.status === 'beta';
         const cardClass = isLive ? 'agent-card is-live' : 'agent-card';
+        const panelId = `logic-${idx}`;
 
         const crmTags = agent.crm.map(c =>
           `<span class="agent-crm">${c}</span>`
@@ -505,19 +648,33 @@
           `<span class="agent-tag">${t}</span>`
         ).join('');
 
-        const checksLabel = agent.checkCount > 0
-          ? `${agent.checkCount} checks`
-          : '';
-
-        const actionLink = isLive
-          ? `<a href="https://github.com/LeRevOps/leclaw/tree/master/agents/${agent.name}" target="_blank" class="agent-link">View source →</a>`
-          : agent.status === 'soon'
-            ? `<a href="/request-agent.html" class="agent-link" style="color:var(--muted)">Request early access →</a>`
-            : `<a href="/request-agent.html" class="agent-link" style="color:rgba(136,153,170,0.4)">Vote →</a>`;
+        const checksLabel = agent.checkCount > 0 ? `${agent.checkCount} checks` : '';
 
         const authorLabel = agent.author.type === 'community'
           ? `by <span>${agent.author.name}</span>`
           : `<span>LeClaw core</span>`;
+
+        const logicSection = isLive && agent.checks ? `
+          <button class="logic-toggle" onclick="toggleLogic('${panelId}', this)">
+            <span>▸</span> view logic
+          </button>
+          <div class="logic-panel" id="${panelId}">
+            ${renderChecks(agent.checks)}
+            <div class="fork-block">
+              <p>Fork this agent — copy the checks above into your own <code>index.ts</code></p>
+              <div class="fork-btns">
+                <a href="https://github.com/LeRevOps/leclaw/blob/master/agents/${agent.name}/AGENT.md" target="_blank" class="fork-btn fork-btn-primary">Fork guide →</a>
+                <a href="https://github.com/LeRevOps/leclaw/tree/master/agents/${agent.name}" target="_blank" class="fork-btn fork-btn-ghost">View source</a>
+              </div>
+            </div>
+          </div>
+        ` : '';
+
+        const footerAction = !isLive
+          ? agent.status === 'soon'
+            ? `<a href="/request-agent.html" class="agent-link" style="color:var(--muted)">Request early access →</a>`
+            : `<a href="/request-agent.html" class="agent-link" style="color:rgba(136,153,170,0.4)">Vote →</a>`
+          : '';
 
         return `
           <div class="${cardClass}">
@@ -530,16 +687,24 @@
               ${crmTags}
               ${tags}
             </div>
+            ${logicSection}
             <div class="agent-card-footer">
               <div>
                 <div class="agent-author">${authorLabel}</div>
                 ${checksLabel ? `<div class="agent-checks">${checksLabel}</div>` : ''}
               </div>
-              ${actionLink}
+              ${footerAction}
             </div>
           </div>
         `;
       }).join('');
+    }
+
+    function toggleLogic(panelId, btn) {
+      const panel = document.getElementById(panelId);
+      const isOpen = panel.classList.toggle('open');
+      btn.querySelector('span').textContent = isOpen ? '▾' : '▸';
+      btn.childNodes[1].textContent = isOpen ? ' hide logic' : ' view logic';
     }
 
     // Filter buttons

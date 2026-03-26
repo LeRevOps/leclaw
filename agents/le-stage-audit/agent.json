@@ -1,7 +1,7 @@
 {
   "name": "le-stage-audit",
   "displayName": "Le Stage Audit",
-  "description": "Audits deals for velocity problems, missing fields, and pipeline health issues. Catches forecast risk before the CRO review.",
+  "description": "Audits deals for velocity problems, missing fields, and pipeline health issues that distort forecast and hide risk.",
   "domain": "pipeline",
   "crm": ["hubspot"],
   "objectTypes": ["deals"],
@@ -15,6 +15,74 @@
     "type": "core"
   },
   "checkCount": 5,
-  "tags": ["pipeline", "deals", "forecast", "stage-hygiene", "close-date"],
-  "coreVersion": "0.3.5"
+  "tags": ["pipeline", "deals", "forecast", "velocity", "stage-hygiene"],
+  "coreVersion": "0.3.6",
+  "checks": [
+    {
+      "id": "deal_no_close_date",
+      "label": "Deals missing close date",
+      "objectType": "deals",
+      "severity": "critical",
+      "why": "A deal with no close date can't appear in forecast and has no urgency signal for the rep. This is the most common source of forecast blindspots.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "closedate", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add a close date — required for accurate forecasting"
+    },
+    {
+      "id": "deal_no_amount",
+      "label": "Deals missing amount",
+      "objectType": "deals",
+      "severity": "critical",
+      "why": "Deals without a dollar value can't contribute to pipeline coverage or quota attainment calculations. They make your forecast look smaller than it is.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "amount", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add a deal value — required for pipeline and forecast accuracy"
+    },
+    {
+      "id": "deal_no_contact",
+      "label": "Deals with no associated contact",
+      "objectType": "deals",
+      "severity": "critical",
+      "why": "Deals with no contact are orphaned — no one to email, no activity tracking, no influence mapping. They'll stall invisibly.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "associations.contact", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Associate at least one contact with this deal"
+    },
+    {
+      "id": "deal_stuck_30d",
+      "label": "Deals stuck in stage for 30+ days",
+      "objectType": "deals",
+      "severity": "warning",
+      "why": "Stalled deals inflate pipeline coverage without real probability of closing. No stage movement after 30 days is a clear stall signal.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "hs_lastmodifieddate", "operator": "LT", "value": "dynamic:30daysAgo" }] }
+      ],
+      "fix": "Review this deal — no stage movement in 30+ days indicates a stall",
+      "note": "Value is computed at runtime: Date.now() - 30 * 24 * 60 * 60 * 1000"
+    },
+    {
+      "id": "deal_past_close_date",
+      "label": "Deals past their close date",
+      "objectType": "deals",
+      "severity": "warning",
+      "why": "Past-close deals are the single biggest source of forecast inflation. Reps roll them forward indefinitely. Every one is either dead or needs a date update.",
+      "filterGroups": [
+        {
+          "filters": [
+            { "propertyName": "closedate", "operator": "LT", "value": "dynamic:now" },
+            { "propertyName": "dealstage", "operator": "NEQ", "value": "closedwon" },
+            { "propertyName": "dealstage", "operator": "NEQ", "value": "closedlost" }
+          ]
+        }
+      ],
+      "fix": "Update the close date or mark as closed lost",
+      "writeback": {
+        "description": "Mark deal as closed lost",
+        "requiresApproval": true
+      }
+    }
+  ]
 }

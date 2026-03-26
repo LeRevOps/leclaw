@@ -15,7 +15,87 @@
     "github": "LeRevOps",
     "type": "core"
   },
-  "checkCount": 6,
+  "checkCount": 7,
   "tags": ["data-quality", "contacts", "companies", "hygiene", "field-completeness"],
-  "coreVersion": "0.3.5"
+  "coreVersion": "0.3.6",
+  "checks": [
+    {
+      "id": "contact_missing_email",
+      "label": "Contacts missing email",
+      "objectType": "contacts",
+      "severity": "critical",
+      "why": "Contacts without email can't be sequenced, emailed, or reliably deduplicated. They break routing rules and pollute segment counts.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "email", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add an email address to this contact"
+    },
+    {
+      "id": "contact_missing_name",
+      "label": "Contacts missing first or last name",
+      "objectType": "contacts",
+      "severity": "warning",
+      "why": "Anonymous contacts can't be personalized in outreach and make attribution reporting unreliable.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "firstname", "operator": "NOT_HAS_PROPERTY" }] },
+        { "filters": [{ "propertyName": "lastname", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add a first name and last name to this contact"
+    },
+    {
+      "id": "contact_no_company",
+      "label": "Contacts with no company association",
+      "objectType": "contacts",
+      "severity": "warning",
+      "why": "Unassociated contacts break account-based reporting and prevent company-level scoring or routing.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "associations.company", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Associate this contact with a company record"
+    },
+    {
+      "id": "contact_missing_job_title",
+      "label": "Contacts missing job title",
+      "objectType": "contacts",
+      "severity": "info",
+      "why": "Missing job title prevents persona-based segmentation and ICP scoring.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "jobtitle", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add a job title to help with segmentation and routing"
+    },
+    {
+      "id": "company_missing_domain",
+      "label": "Companies missing domain",
+      "objectType": "companies",
+      "severity": "critical",
+      "why": "Domain is required for deduplication, enrichment, and email deliverability. Companies without a domain are invisible to most enrichment tools.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "domain", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add the company website domain — required for deduplication and enrichment"
+    },
+    {
+      "id": "company_missing_industry",
+      "label": "Companies missing industry",
+      "objectType": "companies",
+      "severity": "warning",
+      "why": "Industry is required for ICP segmentation, territory assignment, and vertical-specific routing.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "industry", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Add industry to enable segmentation and reporting"
+    },
+    {
+      "id": "company_no_contacts",
+      "label": "Companies with no associated contacts",
+      "objectType": "companies",
+      "severity": "warning",
+      "why": "Ghost companies with no contacts distort account counts and inflate your total addressable market reporting.",
+      "filterGroups": [
+        { "filters": [{ "propertyName": "associations.contact", "operator": "NOT_HAS_PROPERTY" }] }
+      ],
+      "fix": "Associate at least one contact with this company or archive it"
+    }
+  ]
 }
