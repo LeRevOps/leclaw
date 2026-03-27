@@ -11,36 +11,28 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #080E14;
-      --bg-card:   #0C1620;
-      --bg-raised: #111E2C;
-      --sky:       #7EC8E3;
-      --green:     #4ADE80;
-      --white:     #EEF2F6;
-      --muted:     #8899AA;
-      --border:    rgba(126,200,227,0.12);
-      --border-sm: rgba(255,255,255,0.06);
+      --bg:        #FAF8F5;
+      --bg-card:   #F2EDE8;
+      --bg-raised: #EAE3DC;
+      --terra:     #C85C38;
+      --terra-dim: #A84828;
+      --terra-pale:#F5E8E2;
+      --green:     #2D8653;
+      --ink:       #1F1A17;
+      --muted:     #7A6E68;
+      --border:    rgba(200,92,56,0.18);
+      --border-sm: rgba(31,26,23,0.08);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
-      color: var(--white);
+      color: var(--ink);
       font-family: 'Inter', sans-serif;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(126,200,227,0.06) 1px, transparent 1px);
-      background-size: 32px 32px;
-      pointer-events: none;
-      z-index: 0;
     }
 
     section, nav, footer, main { position: relative; z-index: 1; }
@@ -57,7 +49,7 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 60px;
-      background: rgba(8,14,20,0.85);
+      background: rgba(250,248,245,0.92);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-sm);
     }
@@ -65,12 +57,12 @@
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
     .nav-wordmark { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; }
-    .nav-wordmark .le { color: var(--sky); }
-    .nav-wordmark .claw { color: var(--white); }
+    .nav-wordmark .re   { color: var(--terra); }
+    .nav-wordmark .town { color: var(--ink); }
 
     .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.15s; }
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover { color: var(--ink); }
 
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -78,10 +70,10 @@
       font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
       cursor: pointer; text-decoration: none; transition: all 0.15s; border: none;
     }
-    .btn-primary { background: var(--sky); color: var(--bg); }
-    .btn-primary:hover { background: #9AD5EA; }
-    .btn-outline { background: transparent; color: var(--sky); border: 1px solid rgba(126,200,227,0.3); }
-    .btn-outline:hover { border-color: var(--sky); background: rgba(126,200,227,0.05); }
+    .btn-primary { background: var(--terra); color: #FAF8F5; }
+    .btn-primary:hover { background: var(--terra-dim); }
+    .btn-outline { background: transparent; color: var(--terra); border: 1px solid rgba(200,92,56,0.35); }
+    .btn-outline:hover { border-color: var(--terra); background: rgba(200,92,56,0.05); }
 
     /* ── HEADER ── */
     .page-header {
@@ -94,8 +86,9 @@
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--sky);
+      color: var(--terra);
       margin-bottom: 16px;
+      opacity: 0.8;
     }
 
     .page-header h1 {
@@ -104,9 +97,10 @@
       font-weight: 600;
       line-height: 1.0;
       margin-bottom: 16px;
+      color: var(--ink);
     }
 
-    .page-header h1 .le { color: var(--sky); }
+    .page-header h1 .re { color: var(--terra); }
 
     .page-header p {
       font-size: 18px;
@@ -140,12 +134,12 @@
       transition: all 0.15s;
     }
 
-    .filter-btn:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+    .filter-btn:hover { color: var(--ink); border-color: rgba(31,26,23,0.2); }
 
     .filter-btn.active {
-      background: rgba(126,200,227,0.1);
-      border-color: var(--sky);
-      color: var(--sky);
+      background: var(--terra-pale);
+      border-color: rgba(200,92,56,0.4);
+      color: var(--terra);
     }
 
     /* ── STATS BAR ── */
@@ -165,7 +159,7 @@
     .hub-stat-num {
       font-size: 28px;
       font-weight: 500;
-      color: var(--white);
+      color: var(--terra);
       display: block;
     }
 
@@ -195,9 +189,9 @@
       transition: border-color 0.15s;
     }
 
-    .agent-card:hover { border-color: var(--border); }
-    .agent-card.is-live { border-color: rgba(74,222,128,0.15); }
-    .agent-card.is-live:hover { border-color: rgba(74,222,128,0.3); }
+    .agent-card:hover { border-color: rgba(200,92,56,0.25); }
+    .agent-card.is-live { border-color: rgba(45,134,83,0.2); }
+    .agent-card.is-live:hover { border-color: rgba(45,134,83,0.4); }
 
     .agent-card-top {
       display: flex;
@@ -209,7 +203,7 @@
     .agent-name {
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
-      color: var(--sky);
+      color: var(--terra);
       font-weight: 500;
     }
 
@@ -223,10 +217,10 @@
       flex-shrink: 0;
     }
 
-    .status-live    { background: rgba(74,222,128,0.1);  color: #4ADE80; }
-    .status-beta    { background: rgba(126,200,227,0.1); color: var(--sky); }
-    .status-soon    { background: rgba(255,255,255,0.05); color: var(--muted); }
-    .status-planned { background: transparent; color: rgba(136,153,170,0.5); border: 1px solid rgba(255,255,255,0.06); }
+    .status-live    { background: rgba(45,134,83,0.1);  color: #1E6B42; border: 1px solid rgba(45,134,83,0.2); }
+    .status-beta    { background: rgba(200,92,56,0.08); color: var(--terra-dim); border: 1px solid rgba(200,92,56,0.2); }
+    .status-soon    { background: rgba(31,26,23,0.05);  color: var(--muted); border: 1px solid var(--border-sm); }
+    .status-planned { background: transparent; color: rgba(122,110,104,0.5); border: 1px solid var(--border-sm); }
 
     .agent-desc {
       font-size: 13px;
@@ -244,8 +238,8 @@
     .agent-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: rgba(136,153,170,0.6);
-      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      background: var(--bg-raised);
       border: 1px solid var(--border-sm);
       padding: 2px 7px;
       border-radius: 4px;
@@ -254,9 +248,9 @@
     .agent-crm {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: var(--sky);
-      background: rgba(126,200,227,0.06);
-      border: 1px solid var(--border);
+      color: var(--terra);
+      background: var(--terra-pale);
+      border: 1px solid rgba(200,92,56,0.2);
       padding: 2px 7px;
       border-radius: 4px;
     }
@@ -272,14 +266,14 @@
 
     .agent-author {
       font-size: 11px;
-      color: rgba(136,153,170,0.5);
+      color: rgba(122,110,104,0.6);
     }
 
     .agent-author span { color: var(--muted); }
 
     .agent-link {
       font-size: 12px;
-      color: var(--sky);
+      color: var(--terra);
       text-decoration: none;
       font-weight: 500;
       transition: opacity 0.15s;
@@ -290,7 +284,7 @@
     .agent-checks {
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: rgba(136,153,170,0.5);
+      color: rgba(122,110,104,0.5);
     }
 
     /* ── LOGIC PANEL ── */
@@ -300,7 +294,7 @@
       cursor: pointer;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: var(--sky);
+      color: var(--terra);
       padding: 0;
       display: flex;
       align-items: center;
@@ -321,7 +315,7 @@
     .check-item {
       margin-bottom: 16px;
       padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid var(--border-sm);
     }
     .check-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
 
@@ -335,7 +329,7 @@
     .check-id {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: var(--sky);
+      color: var(--terra);
     }
 
     .severity-badge {
@@ -344,9 +338,9 @@
       padding: 1px 6px;
       border-radius: 3px;
     }
-    .sev-critical { background: rgba(248,113,113,0.1); color: #F87171; }
-    .sev-warning  { background: rgba(251,191,36,0.1);  color: #FBBF24; }
-    .sev-info     { background: rgba(126,200,227,0.08); color: var(--sky); }
+    .sev-critical { background: rgba(200,50,50,0.1); color: #B03030; }
+    .sev-warning  { background: rgba(180,120,20,0.1); color: #8A6010; }
+    .sev-info     { background: rgba(200,92,56,0.08); color: var(--terra-dim); }
 
     .check-why {
       font-size: 11px;
@@ -356,13 +350,13 @@
     }
 
     .check-filter {
-      background: #050B10;
-      border: 1px solid var(--border-sm);
+      background: #2A1A12;
+      border: 1px solid rgba(200,92,56,0.15);
       border-radius: 6px;
       padding: 10px 12px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
-      color: #8BB8C8;
+      color: #D4A090;
       overflow-x: auto;
       white-space: pre;
       margin-bottom: 6px;
@@ -370,15 +364,15 @@
 
     .check-fix {
       font-size: 11px;
-      color: rgba(74,222,128,0.8);
+      color: #1E6B42;
       font-family: 'JetBrains Mono', monospace;
     }
 
     .fork-block {
       margin-top: 16px;
       padding: 12px 14px;
-      background: rgba(126,200,227,0.04);
-      border: 1px solid var(--border);
+      background: var(--terra-pale);
+      border: 1px solid rgba(200,92,56,0.2);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -409,14 +403,14 @@
       white-space: nowrap;
       transition: all 0.15s;
     }
-    .fork-btn-primary { background: rgba(126,200,227,0.1); color: var(--sky); border: 1px solid var(--border); }
-    .fork-btn-primary:hover { background: rgba(126,200,227,0.18); }
+    .fork-btn-primary { background: var(--terra); color: #FAF8F5; border: 1px solid var(--terra); }
+    .fork-btn-primary:hover { background: var(--terra-dim); }
     .fork-btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border-sm); }
-    .fork-btn-ghost:hover { color: var(--white); }
+    .fork-btn-ghost:hover { color: var(--ink); border-color: rgba(31,26,23,0.2); }
 
     /* ── CONTRIBUTE CTA ── */
     .contribute-cta {
-      border-top: 1px solid var(--border-sm);
+      background: #2A1A12;
       padding: 80px 0;
       text-align: center;
     }
@@ -426,12 +420,13 @@
       font-size: clamp(32px, 4vw, 48px);
       font-weight: 600;
       margin-bottom: 12px;
+      color: #EEE8E2;
     }
 
-    .contribute-cta h2 span { color: var(--sky); }
+    .contribute-cta h2 span { color: var(--terra); }
 
     .contribute-cta p {
-      color: var(--muted);
+      color: rgba(238,232,226,0.6);
       font-size: 16px;
       max-width: 480px;
       margin: 0 auto 36px;
@@ -451,7 +446,7 @@
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border-sm);
+      background: #1F1208;
       padding: 32px 40px;
       text-align: center;
     }
@@ -461,9 +456,9 @@
       margin-bottom: 16px; list-style: none; flex-wrap: wrap;
     }
 
-    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { font-size: 12px; color: var(--muted); }
+    .footer-links a { font-size: 13px; color: rgba(238,232,226,0.4); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: rgba(238,232,226,0.8); }
+    .footer-copy { font-size: 12px; color: rgba(200,92,56,0.4); font-family: 'JetBrains Mono', monospace; }
 
     @media (max-width: 860px) {
       nav { padding: 0 20px; }
@@ -478,11 +473,11 @@
   <nav>
     <a href="/" class="nav-logo">
       <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHEcoq4xyPuNg/company-logo_100_100/B4EZ0WWimoI8AQ-/0/1774196501286/leclaw_logo?e=1775692800&v=beta&t=YPPjyI-jp-bnvf7d74bPrZqTZGj0800VNMhKoWbapbw" alt="Revtown" />
-      <div class="nav-wordmark"><span class="le">Rev</span><span class="claw">town</span></div>
+      <div class="nav-wordmark"><span class="re">Rev</span><span class="town">town</span></div>
     </a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/agents.html" style="color:var(--sky);">Agent Hub</a></li>
+      <li><a href="/agents.html" style="color:var(--terra);">Agent Hub</a></li>
       <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
       <li><a href="/request-agent.html">Request an Agent</a></li>
       <li><a href="/contact.html">Contact</a></li>
@@ -496,7 +491,7 @@
       <!-- HEADER -->
       <div class="page-header">
         <div class="section-label">// les agents</div>
-        <h1>The <span class="le">Le</span>Claw Agent Hub</h1>
+        <h1>The <span class="re">Rev</span>town Agent Hub</h1>
         <p>Every agent encodes what "broken" looks like in a RevOps domain. Browse, install, or contribute one.</p>
 
         <!-- FILTERS -->
@@ -541,10 +536,10 @@
     <section class="contribute-cta">
       <div class="container">
         <h2>Know what <span>"broken"</span> looks like?</h2>
-        <p>Every agent is a <code style="font-size:14px;color:var(--sky);">CLAUDE.md</code> — a plain description of what broken looks like in a RevOps domain. Click "view logic" on any live agent to see exactly how they're built, then fork one.</p>
+        <p>Every agent is a <code style="font-size:14px;color:var(--terra);">CLAUDE.md</code> — a plain description of what broken looks like in a RevOps domain. Click "view logic" on any live agent to see exactly how they're built, then fork one.</p>
         <div class="contribute-btns">
           <a href="https://github.com/LeRevOps/leclaw/blob/master/CONTRIBUTING.md" target="_blank" class="btn btn-primary">Read the contributing guide →</a>
-          <a href="/request-agent.html" class="btn btn-outline">Request an agent instead →</a>
+          <a href="/request-agent.html" class="btn btn-outline" style="color:#EEE8E2;border-color:rgba(238,232,226,0.2);" onmouseover="this.style.borderColor='rgba(238,232,226,0.5)'" onmouseout="this.style.borderColor='rgba(238,232,226,0.2)'">Request an agent instead →</a>
         </div>
       </div>
     </section>
@@ -617,11 +612,11 @@
           <div class="check-header">
             <span class="check-id">${c.id}</span>
             <span class="severity-badge ${severityClass(c.severity)}">${c.severity}</span>
-            ${c.writeback ? `<span class="severity-badge" style="background:rgba(251,191,36,0.08);color:#FBBF24;">write-back</span>` : ''}
+            ${c.writeback ? `<span class="severity-badge" style="background:rgba(180,140,20,0.1);color:#8A6010;">write-back</span>` : ''}
           </div>
           ${c.why ? `<p class="check-why">${c.why}</p>` : ''}
           <div class="check-filter">${JSON.stringify(c.filterGroups, null, 2)}</div>
-          ${c.note ? `<p class="check-why" style="color:rgba(136,153,170,0.5);font-size:10px;">ℹ ${c.note}</p>` : ''}
+          ${c.note ? `<p class="check-why" style="color:rgba(122,110,104,0.5);font-size:10px;">ℹ ${c.note}</p>` : ''}
           <p class="check-fix">→ ${c.fix}</p>
         </div>
       `).join('');
@@ -662,7 +657,7 @@
             ${renderChecks(agent.checks)}
             <div class="fork-block">
               <p>
-                <strong style="color:var(--white);">Use this logic in Claude.</strong><br>
+                <strong style="color:var(--ink);">Use this logic in Claude.</strong><br>
                 Copy the <code>CLAUDE.md</code> into any Claude project — Claude will apply this agent's logic to your CRM questions automatically.
               </p>
               <div class="fork-btns">
@@ -676,7 +671,7 @@
         const footerAction = !isLive
           ? agent.status === 'soon'
             ? `<a href="/request-agent.html" class="agent-link" style="color:var(--muted)">Request early access →</a>`
-            : `<a href="/request-agent.html" class="agent-link" style="color:rgba(136,153,170,0.4)">Vote →</a>`
+            : `<a href="/request-agent.html" class="agent-link" style="color:rgba(122,110,104,0.4)">Vote →</a>`
           : '';
 
         return `
