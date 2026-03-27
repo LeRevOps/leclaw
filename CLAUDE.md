@@ -44,7 +44,7 @@ Every feature decision, every architecture choice, every session should move tow
 
 **The community flywheel:** A BDR manager knows what SLA failure looks like. A CSM knows renewal risk. The framework makes it easy to contribute an agent (filterGroups checks + a summary prompt) — no engineering background required. Every contributed agent is institutional RevOps knowledge that runs in hundreds of CRMs.
 
-**Positioning:** "Native agents are features inside a single product. Revtown is the open-source GTM agent hub — agents for every domain, deployable against any CRM, from CLI or dashboard."
+**Positioning:** "Welcome to Revtown — a town of RevOps specialists, each one watching a different corner of your CRM. Le Directeur coordinates them all."
 
 **ICP:** Any B2B company with a sales team and a CRM. Primary: Head of RevOps / VP Sales Ops at Series B–C SaaS, $10–50M ARR. Secondary: GTM engineers who want to encode their own domain knowledge and contribute to the hub.
 
@@ -232,7 +232,7 @@ leclaw/
 - LeanData (routing only)
 - LangChain Deep Agents (GTM reference impl, open-sourced March 2026) ← emerging threat
 
-**Core insight:** RevOps teams fear being blindsided in front of the CRO. Revtown catches problems before they become someone else's problem. The moat is not the framework — it is the encoded domain knowledge in the agents. Anyone can build a framework. Only practitioners who lived the pain know what broken looks like across the full revenue motion.
+**Core insight:** RevOps teams fear being blindsided in front of the CRO. Revtown is the town where every specialist is already watching their corner of the GTM stack. The moat is not the framework — it is the encoded domain knowledge in the agents. Every contributed agent adds a resident specialist to the town. That compounds.
 
 **Every session should move toward the agent library goal. If a decision doesn't add agents, enable others to add agents, or make Le Directeur smarter — it is a lower priority.**
 
