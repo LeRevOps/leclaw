@@ -703,18 +703,6 @@ End every audit with a pipeline health score (0–100) and the top 3 things to f
           : `<span>Revtown core</span>`;
 
         const claudePrompt = CLAUDE_PROMPTS[agent.name];
-        const useInClaude = isLive && claudePrompt ? `
-          <div style="margin-top:4px;padding:12px 14px;background:var(--terra-pale);border:1px solid rgba(200,92,56,0.2);border-radius:8px;">
-            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink);font-weight:500;margin-bottom:6px;">Use in Claude Projects — no code required</p>
-            <p style="font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:10px;">Paste this specialist's instructions into a Claude Project. Export your CRM data as CSV, share it with Claude, and this resident goes to work.</p>
-            <button
-              onclick="copyToClipboard(CLAUDE_PROMPTS['${agent.name}'], this)"
-              style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:7px 14px;border-radius:6px;border:1px solid rgba(200,92,56,0.35);background:var(--terra);color:#FAF8F5;cursor:pointer;transition:all 0.15s;width:100%;"
-              onmouseover="this.style.background='#A84828'"
-              onmouseout="this.style.background='var(--terra)'"
-            >Copy specialist instructions →</button>
-          </div>
-        ` : '';
 
         const logicSection = isLive && agent.checks ? `
           <button class="logic-toggle" onclick="toggleLogic('${panelId}', this)">
@@ -722,16 +710,14 @@ End every audit with a pipeline health score (0–100) and the top 3 things to f
           </button>
           <div class="logic-panel" id="${panelId}">
             ${renderChecks(agent.checks)}
-            <div class="fork-block">
-              <p>
-                <strong style="color:var(--ink);">Use this logic in Claude.</strong><br>
-                Copy the <code>CLAUDE.md</code> into any Claude project — Claude will apply this agent's logic to your CRM questions automatically.
-              </p>
-              <div class="fork-btns">
-                <a href="https://github.com/LeRevOps/leclaw/blob/master/agents/${agent.name}/CLAUDE.md" target="_blank" class="fork-btn fork-btn-primary">Open CLAUDE.md →</a>
-                <a href="https://github.com/LeRevOps/leclaw/tree/master/agents/${agent.name}" target="_blank" class="fork-btn fork-btn-ghost">View source</a>
-              </div>
-            </div>
+          </div>
+        ` : '';
+
+        const liveActions = isLive ? `
+          <div style="display:flex;gap:8px;margin-top:auto;padding-top:12px;border-top:1px solid var(--border-sm);flex-wrap:wrap;">
+            <a href="https://app.revtown.io" target="_blank" style="flex:1;min-width:0;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:7px 10px;border-radius:6px;background:var(--terra);color:#FAF8F5;text-decoration:none;text-align:center;transition:background 0.15s;" onmouseover="this.style.background='#A84828'" onmouseout="this.style.background='var(--terra)'">Run →</a>
+            ${claudePrompt ? `<button onclick="copyToClipboard(CLAUDE_PROMPTS['${agent.name}'], this)" style="flex:1;min-width:0;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:7px 10px;border-radius:6px;border:1px solid rgba(200,92,56,0.35);background:transparent;color:var(--terra);cursor:pointer;transition:all 0.15s;" onmouseover="this.style.background='var(--terra-pale)'" onmouseout="this.style.background='transparent'">Copy for Claude</button>` : ''}
+            <a href="https://github.com/LeRevOps/leclaw/tree/master/agents/${agent.name}" target="_blank" style="flex:1;min-width:0;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;padding:7px 10px;border-radius:6px;border:1px solid var(--border-sm);background:transparent;color:var(--muted);text-decoration:none;text-align:center;transition:all 0.15s;" onmouseover="this.style.color='var(--ink)';this.style.borderColor='rgba(31,26,23,0.2)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--border-sm)'">Fork</a>
           </div>
         ` : '';
 
@@ -742,7 +728,7 @@ End every audit with a pipeline health score (0–100) and the top 3 things to f
           : '';
 
         return `
-          <div class="${cardClass}">
+          <div class="${cardClass}" style="display:flex;flex-direction:column;">
             <div class="agent-card-top">
               <div class="agent-name">${agent.name}</div>
               <span class="agent-status ${STATUS_CLASS[agent.status] || 'status-planned'}">${STATUS_LABEL[agent.status] || agent.status}</span>
@@ -752,15 +738,9 @@ End every audit with a pipeline health score (0–100) and the top 3 things to f
               ${crmTags}
               ${tags}
             </div>
-            ${useInClaude}
             ${logicSection}
-            <div class="agent-card-footer">
-              <div>
-                <div class="agent-author">${authorLabel}</div>
-                ${checksLabel ? `<div class="agent-checks">${checksLabel}</div>` : ''}
-              </div>
-              ${footerAction}
-            </div>
+            ${liveActions}
+            ${!isLive ? `<div class="agent-card-footer"><div><div class="agent-author">${authorLabel}</div>${checksLabel ? `<div class="agent-checks">${checksLabel}</div>` : ''}</div>${footerAction}</div>` : `<div style="margin-top:6px;"><div class="agent-author">${authorLabel}</div>${checksLabel ? `<div class="agent-checks">${checksLabel}</div>` : ''}</div>`}
           </div>
         `;
       }).join('');
