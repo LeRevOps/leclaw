@@ -1,6 +1,6 @@
 {
   "name": "@revtown/core",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Open-source RevOps agent hub for HubSpot and Salesforce",
   "type": "module",
   "main": "./core/index.js",
@@ -52,15 +52,15 @@
     "gtm",
     "automation"
   ],
-  "author": "LeClaw <hello@leclaw.io>",
+  "author": "Revtown <hello@revtown.io>",
   "license": "MIT",
   "homepage": "https://revtown.io",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LeRevOps/leclaw.git"
+    "url": "git+https://github.com/LeRevOps/revtown.git"
   },
   "bugs": {
-    "url": "https://github.com/LeRevOps/leclaw/issues"
+    "url": "https://github.com/LeRevOps/revtown/issues"
   },
   "dependencies": {
     "dotenv": "^16.0.0"
