@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Revtown — The open-source GTM agent hub</title>
+  <title>RevTown — A growing town of AI agents that automate RevOps</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -250,48 +250,6 @@
       max-width: 520px;
     }
 
-    /* ── PAIN ── */
-    .pain {
-      padding: 100px 0;
-      border-top: 1px solid var(--border-sm);
-    }
-
-    .pain-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .pain-items {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .pain-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 16px 20px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-sm);
-      border-radius: 8px;
-      transition: border-color 0.2s;
-    }
-
-    .pain-item:hover { border-color: rgba(200,92,56,0.3); }
-    .pain-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-
-    .pain-text { font-size: 14px; color: var(--muted); line-height: 1.5; }
-    .pain-text strong {
-      display: block;
-      color: var(--ink);
-      font-weight: 500;
-      margin-bottom: 2px;
-      font-size: 13px;
-    }
-
     /* ── BELIEF ── */
     .belief {
       padding: 80px 0;
@@ -436,7 +394,7 @@
       background: var(--terra-pale);
     }
 
-    .arch-node.arch-témoin {
+    .arch-node.arch-temoin {
       border-color: rgba(180,140,20,0.25);
     }
 
@@ -509,39 +467,6 @@
       position: relative;
       z-index: 1;
       letter-spacing: 0.06em;
-    }
-
-    .arch-terms {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      max-width: 680px;
-      margin: 40px auto 0;
-    }
-
-    .arch-term {
-      background: var(--bg-card);
-      border: 1px solid var(--border-sm);
-      border-radius: 8px;
-      padding: 16px 20px;
-    }
-
-    .arch-term-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 15px;
-      font-style: italic;
-      color: var(--terra);
-      margin-bottom: 4px;
-    }
-
-    .arch-term-def {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 860px) {
-      .arch-terms { grid-template-columns: 1fr 1fr; }
     }
 
     /* ── DEMO ── */
@@ -758,7 +683,6 @@
       .stats-bar { flex-direction: column; }
       .stat { border-right: none; border-bottom: 1px solid var(--border-sm); }
       .stat:last-child { border-bottom: none; }
-      .pain-grid { grid-template-columns: 1fr; gap: 40px; }
       .agents-header { grid-template-columns: 1fr; gap: 24px; }
       .agent-grid { grid-template-columns: 1fr; }
       .how-tracks { grid-template-columns: 1fr; gap: 12px; }
@@ -771,17 +695,15 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
-      <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHEcoq4xyPuNg/company-logo_100_100/B4EZ0WWimoI8AQ-/0/1774196501286/leclaw_logo?e=1775692800&v=beta&t=YPPjyI-jp-bnvf7d74bPrZqTZGj0800VNMhKoWbapbw" alt="Revtown" />
+      <img src="https://media.licdn.com/dms/image/v2/D4E0BAQHEcoq4xyPuNg/company-logo_100_100/B4EZ0WWimoI8AQ-/0/1774196501286/leclaw_logo?e=1775692800&v=beta&t=YPPjyI-jp-bnvf7d74bPrZqTZGj0800VNMhKoWbapbw" alt="RevTown" />
       <div class="nav-wordmark"><span class="re">Rev</span><span class="town">town</span></div>
     </a>
     <ul class="nav-links">
-      <li><a href="/agents.html">Agent Hub</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#agents">The Town</a></li>
       <li><a href="#architecture">Architecture</a></li>
       <li><a href="#demo" style="color:var(--terra);">Demo</a></li>
-      <li><a href="#how">How It Works</a></li>
       <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
-      <li><a href="/request-agent.html">Request an Agent</a></li>
-      <li><a href="/contact.html">Contact</a></li>
     </ul>
     <a href="https://app.revtown.io" class="btn btn-primary">Get Started Free</a>
   </nav>
@@ -791,35 +713,30 @@
     <div class="container">
       <div class="hero-badge">
         <span class="dot"></span>
-        open-source · MIT licensed · community-built
+        open-source · MIT licensed · HubSpot native
       </div>
 
       <h1>Welcome to <span class="re">Rev</span>town.</h1>
 
       <p class="hero-tagline">
-        A warm place for RevOps people.<br/>
-        <strong>Every specialist in town is watching your CRM.</strong><br/>
+        A growing town of AI agents that automate RevOps.<br/>
+        <strong>Your keys. Your town. You're the Mayor.</strong><br/>
         Le Directeur makes sure nothing gets missed.
       </p>
 
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.6vw,18px);color:var(--muted);font-style:italic;margin-top:-40px;margin-bottom:48px;">
-        Inspired by Lyon, France — where every quartier has a specialist.
-      </p>
-
       <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-        <a href="/agents.html" class="btn btn-primary btn-lg">Meet the residents →</a>
+        <a href="#agents" class="btn btn-primary btn-lg">Meet the residents →</a>
         <a href="https://app.revtown.io" class="btn btn-outline btn-lg">Open the dashboard →</a>
       </div>
 
-      <!-- Town population sign -->
       <div class="stats-bar">
         <div class="stat">
-          <div class="stat-num">10</div>
-          <div class="stat-label">resident specialists<br/>covering the full revenue motion</div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">citizens live today<br/>population growing</div>
         </div>
         <div class="stat">
-          <div class="stat-num">2 CRMs</div>
-          <div class="stat-label">HubSpot + Salesforce<br/>every resident works both</div>
+          <div class="stat-num">12</div>
+          <div class="stat-label">citizens planned<br/>full RevOps coverage</div>
         </div>
         <div class="stat">
           <div class="stat-num">MIT</div>
@@ -827,7 +744,7 @@
         </div>
         <div class="stat">
           <div class="stat-num">2 min</div>
-          <div class="stat-label">to your first<br/>resident running</div>
+          <div class="stat-label">to your first<br/>citizen running</div>
         </div>
       </div>
     </div>
@@ -838,90 +755,49 @@
     <div class="container">
       <div class="how-header">
         <div class="section-label">// how it works</div>
-        <h2 class="section-title">A town has specialists.<br/>Revtown has agents.</h2>
-        <p class="section-body" style="max-width:540px;margin:0 auto;">Every RevOps domain has a resident specialist watching it. Le Directeur — the town's director — coordinates them, dispatches missions, and synthesizes what they find into one answer.</p>
+        <h2 class="section-title">Three ways in.<br/>Any path makes you a resident.</h2>
+        <p class="section-body" style="max-width:540px;margin:0 auto;">Pick a citizen, connect your CRM, get a report. No agents to configure, no workflows to build. The tedious work is already encoded.</p>
       </div>
       <div class="how-tracks">
-
-        <!-- The Hub track -->
-        <div class="how-track">
-          <div class="how-track-header">
-            <span class="how-track-label">// the hub</span>
-            <span class="how-track-audience">Community · Contributors · Practitioners</span>
-          </div>
-          <div class="how-steps">
-            <div class="how-step">
-              <div class="how-step-num">01</div>
-              <div class="how-step-content">
-                <div class="how-step-title">Meet the residents</div>
-                <div class="how-step-desc">Each specialist covers a corner of your GTM stack — data quality, pipeline health, BDR follow-up, forecast accuracy. Browse the town directory.</div>
-              </div>
-            </div>
-            <div class="how-step">
-              <div class="how-step-num">02</div>
-              <div class="how-step-content">
-                <div class="how-step-title">Invite one into your CRM</div>
-                <div class="how-step-desc">Every resident is a self-contained npm package. Connect a CRM token and they get to work — no setup beyond that.</div>
-              </div>
-            </div>
-            <div class="how-step">
-              <div class="how-step-num">03</div>
-              <div class="how-step-content">
-                <div class="how-step-title">Add your own specialist</div>
-                <div class="how-step-desc">You've run a GTM motion. You know what goes wrong. Encode that as an agent — a list of CRM checks and a summary prompt. The town grows with every contribution.</div>
-              </div>
-            </div>
-            <div class="how-step">
-              <div class="how-step-num">04</div>
-              <div class="how-step-content">
-                <div class="how-step-title">Every CRM. Same resident.</div>
-                <div class="how-step-desc">Residents are CRM-portable by design. HubSpot and Salesforce — every specialist works both sides of the street.</div>
-              </div>
-            </div>
-          </div>
-          <div class="how-track-cta">
-            <a href="/agents.html" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Meet the residents →</a>
-          </div>
-        </div>
 
         <!-- Claude Projects track -->
         <div class="how-track">
           <div class="how-track-header">
             <span class="how-track-label">// claude projects</span>
-            <span class="how-track-audience">RevOps Manager · No code needed</span>
+            <span class="how-track-audience">No install · No API key</span>
           </div>
           <div class="how-steps">
             <div class="how-step">
               <div class="how-step-num">01</div>
               <div class="how-step-content">
-                <div class="how-step-title">Pick a resident</div>
-                <div class="how-step-desc">Go to the town directory and find the specialist you need — Le Data Quality, Le Stage Audit, or any live resident.</div>
+                <div class="how-step-title">Pick a citizen</div>
+                <div class="how-step-desc">Find the specialist you need — Le Data Quality, Le Stage Audit, or any live citizen in the town directory.</div>
               </div>
             </div>
             <div class="how-step">
               <div class="how-step-num">02</div>
               <div class="how-step-content">
                 <div class="how-step-title">Copy their instructions</div>
-                <div class="how-step-desc">Every resident has a "Copy specialist instructions" button. One click copies their domain knowledge as a Claude Project prompt. No code, no API key, no setup.</div>
+                <div class="how-step-desc">One click copies the citizen's domain knowledge as a Claude Project prompt. No code. No API key. No setup.</div>
               </div>
             </div>
             <div class="how-step">
               <div class="how-step-num">03</div>
               <div class="how-step-content">
                 <div class="how-step-title">Paste into Claude Projects</div>
-                <div class="how-step-desc">Open Claude, create a new Project, paste the instructions. The resident is now your Claude specialist — they know exactly what to look for in your CRM data.</div>
+                <div class="how-step-desc">Create a new Claude Project, paste the instructions. The citizen is now your specialist — they know exactly what to look for.</div>
               </div>
             </div>
             <div class="how-step">
               <div class="how-step-num">04</div>
               <div class="how-step-content">
-                <div class="how-step-title">Share your CRM export</div>
-                <div class="how-step-desc">Export contacts, deals, or companies from HubSpot or Salesforce as a CSV. Drop it in the chat. The resident audits it and tells you exactly what to fix.</div>
+                <div class="how-step-title">Drop in a CRM export</div>
+                <div class="how-step-desc">Export contacts or deals from HubSpot as a CSV. Drop it in the chat. Get a report on what to fix.</div>
               </div>
             </div>
           </div>
           <div class="how-track-cta">
-            <a href="/agents.html" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Get a specialist →</a>
+            <a href="#agents" class="btn btn-primary" style="width:100%;text-align:center;display:block;">Get a citizen →</a>
           </div>
         </div>
 
@@ -936,21 +812,21 @@
               <div class="how-step-num">01</div>
               <div class="how-step-content">
                 <div class="how-step-title">Connect your CRM</div>
-                <div class="how-step-desc">OAuth into HubSpot or Salesforce in two minutes. Dashboard at app.revtown.io or <code style="font-family:monospace;font-size:12px;background:rgba(200,92,56,0.08);padding:1px 5px;border-radius:3px;color:var(--terra)">npx revtown setup</code> from the terminal.</div>
+                <div class="how-step-desc">Connect HubSpot in two minutes. Dashboard at app.revtown.io or <code style="font-family:monospace;font-size:12px;background:rgba(200,92,56,0.08);padding:1px 5px;border-radius:3px;color:var(--terra)">npx revtown setup</code> from the terminal.</div>
               </div>
             </div>
             <div class="how-step">
               <div class="how-step-num">02</div>
               <div class="how-step-content">
-                <div class="how-step-title">Le Directeur deploys hub agents</div>
-                <div class="how-step-desc">Pick which agents to run. Le Directeur dispatches them in parallel, each in an isolated Docker container, and synthesizes findings into one answer.</div>
+                <div class="how-step-title">Talk to Le Directeur</div>
+                <div class="how-step-desc">Ask anything in plain language. Le Directeur dispatches the right citizens, runs them in parallel, and synthesizes one answer.</div>
               </div>
             </div>
             <div class="how-step">
               <div class="how-step-num">03</div>
               <div class="how-step-content">
-                <div class="how-step-title">Ask it anything</div>
-                <div class="how-step-desc">Natural language interface routes your question to the right agents and returns a trend-aware synthesis — surfacing patterns across weeks, not just today.</div>
+                <div class="how-step-title">Get a trend-aware report</div>
+                <div class="how-step-desc">The synthesis includes four weeks of run history — surfacing patterns across time, not just today's snapshot.</div>
               </div>
             </div>
             <div class="how-step">
@@ -963,6 +839,47 @@
           </div>
           <div class="how-track-cta">
             <a href="https://app.revtown.io" class="btn btn-outline" style="width:100%;text-align:center;display:block;">Run with Le Directeur →</a>
+          </div>
+        </div>
+
+        <!-- Fork it track -->
+        <div class="how-track">
+          <div class="how-track-header">
+            <span class="how-track-label">// fork it</span>
+            <span class="how-track-audience">GTM Engineer · Town Builder</span>
+          </div>
+          <div class="how-steps">
+            <div class="how-step">
+              <div class="how-step-num">01</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Clone the repo</div>
+                <div class="how-step-desc">The full framework is MIT licensed. Clone it, run existing citizens against your own CRM, and see how they're built.</div>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">02</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Build a new citizen</div>
+                <div class="how-step-desc">Start from the <code style="font-family:monospace;font-size:12px;background:rgba(200,92,56,0.08);padding:1px 5px;border-radius:3px;color:var(--terra)">examples/</code> template. Define what "broken" looks like in your domain. Add CRM checks, write a summary prompt. That's a citizen.</div>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">03</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Contribute it back</div>
+                <div class="how-step-desc">Open a PR. If you've run a GTM motion, you know what breaks. Encode that knowledge and add a specialist to the town.</div>
+              </div>
+            </div>
+            <div class="how-step">
+              <div class="how-step-num">04</div>
+              <div class="how-step-content">
+                <div class="how-step-title">Your name on the door</div>
+                <div class="how-step-desc">Every contributed citizen carries your name in its introduction. Your domain knowledge runs in CRMs across the town.</div>
+              </div>
+            </div>
+          </div>
+          <div class="how-track-cta">
+            <a href="https://github.com/LeRevOps/leclaw" target="_blank" class="btn btn-outline" style="width:100%;text-align:center;display:block;">View on GitHub →</a>
           </div>
         </div>
 
@@ -982,7 +899,7 @@
           freeing us up for strategy and better serving the people we're here to support:
           the sales team in front of the customer."
         </p>
-        <p class="belief-attr">— Benjamin LeBlanc, Sales Operations · Docker</p>
+        <p class="belief-attr">— Benjamin LeBlanc, GTM Architect · Docker</p>
       </div>
     </div>
   </section>
@@ -997,9 +914,11 @@
         </div>
         <div style="padding-top: 40px;">
           <p class="section-body" style="margin-bottom: 20px;">
-            Each agent is a resident specialist. Le Data Quality watches your records. Le Stage Audit watches your pipeline. Every new agent adds a specialist to the town — contributed by practitioners who ran that motion.
+            Every citizen owns a domain. Le Data Quality watches your records. Le Stage Audit watches your pipeline. Each new citizen adds a specialist — contributed by practitioners who ran that motion and encoded what failure looks like.
           </p>
-          <a href="/agents.html" style="display:inline-block; font-size:13px; color:var(--terra); text-decoration:none; border:1px solid rgba(200,92,56,0.25); border-radius:6px; padding:8px 16px; transition:border-color 0.15s;" onmouseover="this.style.borderColor='rgba(200,92,56,0.6)'" onmouseout="this.style.borderColor='rgba(200,92,56,0.25)'">Browse all agents →</a>
+          <p class="section-body" style="font-size:13px;margin-bottom:20px;">
+            Population: 2 live · 10 coming
+          </p>
         </div>
       </div>
 
@@ -1009,49 +928,42 @@
             <div class="agent-name">le-data-quality</div>
             <span class="agent-status status-live">live</span>
           </div>
-          <div class="agent-desc">Field completeness, relationship hygiene, missing associations. Generates a CRM health score.</div>
+          <div class="agent-desc">Field completeness, relationship hygiene, missing associations. Generates a CRM health score and flags every record that needs attention.</div>
         </div>
         <div class="agent-card">
           <div class="agent-card-top">
             <div class="agent-name">le-stage-audit</div>
             <span class="agent-status status-live">live</span>
           </div>
-          <div class="agent-desc">Deal velocity and pipeline health. Stuck deals, missing close dates, past-close opportunities.</div>
-        </div>
-        <div class="agent-card">
-          <div class="agent-card-top">
-            <div class="agent-name">le-duplicates</div>
-            <span class="agent-status status-soon">bientôt</span>
-          </div>
-          <div class="agent-desc">Identity resolution across contacts and companies. Duplicates corrupt every agent above them.</div>
+          <div class="agent-desc">Deal velocity and pipeline health. Stuck deals, missing close dates, stage-skip violations. Flags the ones your reps thought nobody would notice.</div>
         </div>
         <div class="agent-card">
           <div class="agent-card-top">
             <div class="agent-name">le-bdr</div>
-            <span class="agent-status status-soon">bientôt</span>
+            <span class="agent-status status-soon">coming soon</span>
           </div>
-          <div class="agent-desc">Follow-up SLA gaps, unworked MQLs, sequence health. BDR performance without the spreadsheet.</div>
+          <div class="agent-desc">Follow-up SLA gaps, unworked MQLs, sequence health. BDR accountability without the spreadsheet.</div>
         </div>
         <div class="agent-card">
           <div class="agent-card-top">
-            <div class="agent-name">le-lead-gen</div>
-            <span class="agent-status status-soon">bientôt</span>
+            <div class="agent-name">le-forecast</div>
+            <span class="agent-status status-soon">coming soon</span>
           </div>
-          <div class="agent-desc">MQL quality, attribution gaps, missing lead source. What enters the funnel shapes everything below.</div>
-        </div>
-        <div class="agent-card">
-          <div class="agent-card-top">
-            <div class="agent-name">le-routing</div>
-            <span class="agent-status status-soon">bientôt</span>
-          </div>
-          <div class="agent-desc">Assignment gaps, round-robin health, SLA compliance. A missing field shouldn't strand a lead.</div>
+          <div class="agent-desc">Commit accuracy, pipeline coverage ratio, category misuse. Know what's real before the Friday review.</div>
         </div>
         <div class="agent-card agent-coming">
           <div class="agent-card-top">
-            <div class="agent-name">le-forecast</div>
+            <div class="agent-name">le-plumber</div>
             <span class="agent-status status-road">roadmap</span>
           </div>
-          <div class="agent-desc">Commit accuracy, pipeline coverage ratio, category misuse. Know before the Friday review.</div>
+          <div class="agent-desc">Routing gaps, unassigned leads, round-robin health. A missing field shouldn't strand a lead.</div>
+        </div>
+        <div class="agent-card agent-coming">
+          <div class="agent-card-top">
+            <div class="agent-name">le-renewal</div>
+            <span class="agent-status status-road">roadmap</span>
+          </div>
+          <div class="agent-desc">Renewal risk, upcoming dates with no outreach, expansion signals going unworked.</div>
         </div>
         <div class="agent-card agent-coming">
           <div class="agent-card-top">
@@ -1069,31 +981,31 @@
         </div>
         <div class="agent-card agent-coming">
           <div class="agent-card-top">
-            <div class="agent-name">le-renewal</div>
+            <div class="agent-name">le-duplicates</div>
             <span class="agent-status status-road">roadmap</span>
           </div>
-          <div class="agent-desc">Renewal risk, upcoming dates with no outreach, expansion signals going unworked.</div>
+          <div class="agent-desc">Identity resolution across contacts and companies. Duplicates corrupt every citizen above them.</div>
         </div>
         <div class="agent-card agent-coming">
           <div class="agent-card-top">
-            <div class="agent-name">le-enrichment</div>
+            <div class="agent-name">le-territory</div>
             <span class="agent-status status-road">roadmap</span>
           </div>
-          <div class="agent-desc">Identifies records enrichable from external sources. Gaps that can be filled, automatically.</div>
+          <div class="agent-desc">Coverage gaps, misaligned assignments, rep territory health. Territory carves that hold up at QBR.</div>
         </div>
         <div class="agent-card agent-coming">
           <div class="agent-card-top">
-            <div class="agent-name">le-workflows</div>
+            <div class="agent-name">le-commission</div>
             <span class="agent-status status-road">roadmap</span>
           </div>
-          <div class="agent-desc">Broken automations, zero-enrollment workflows, error states. The automation layer, audited.</div>
+          <div class="agent-desc">Accuracy, dispute prevention, quota hygiene. Catch comp errors before they become HR conversations.</div>
         </div>
         <div class="agent-card agent-coming">
           <div class="agent-card-top">
-            <div class="agent-name">le-cs</div>
+            <div class="agent-name">le-qbr</div>
             <span class="agent-status status-road">roadmap</span>
           </div>
-          <div class="agent-desc">Health score gaps, missing QBR logs, expansion signals. Post-sale coverage that compounds.</div>
+          <div class="agent-desc">Automated QBR prep, trend analysis, performance summaries. The deck that writes itself.</div>
         </div>
       </div>
     </div>
@@ -1103,10 +1015,10 @@
   <section class="arch" id="architecture">
     <div class="container">
       <div class="arch-header">
-        <div class="section-label">// l'architecture</div>
+        <div class="section-label">// architecture</div>
         <h2 class="section-title">Le Directeur<br/>runs the town.</h2>
         <p class="section-body">
-          Every specialist files un rapport. Le Directeur reads them all and synthesizes one answer. Le Témoin approves every write-back before it touches your CRM.
+          Every citizen files a report. Le Directeur reads them all and synthesizes one answer. Le Témoin reviews every write-back before it touches your CRM.
         </p>
       </div>
 
@@ -1117,30 +1029,29 @@
           <div class="arch-mono-badge arch-badge-ld">LD</div>
           <div class="arch-node-content">
             <div class="arch-node-name color-terra">Le Directeur</div>
-            <div class="arch-node-role">orchestrateur · dispatches une mission</div>
+            <div class="arch-node-role">mayor's right hand · coordinates the town</div>
             <div class="arch-node-desc">
-              The orchestrating agent. Coordinates which agents run, in what order,
-              with what context. Reads every rapport and synthesizes a final insight
-              no individual agent can see.
+              The orchestrating agent. Coordinates which citizens run, in what order, with what context.
+              Reads every report and synthesizes a final insight no individual citizen can see alone.
+              Talk to it however you like — it knows what to do.
             </div>
           </div>
         </div>
 
         <div class="arch-connector">
-          <span class="arch-connector-label">dispatches → une mission</span>
+          <span class="arch-connector-label">dispatches → citizens</span>
         </div>
 
-        <!-- Les Agents -->
+        <!-- The Citizens -->
         <div class="arch-node">
-          <div class="arch-mono-badge arch-badge-ag">13</div>
+          <div class="arch-mono-badge arch-badge-ag">12</div>
           <div class="arch-node-content">
-            <div class="arch-node-name">les agents</div>
-            <div class="arch-node-role">spécialistes · each files un rapport</div>
+            <div class="arch-node-name">the citizens</div>
+            <div class="arch-node-role">specialists · each files a report</div>
             <div class="arch-node-desc">
-              Each agent owns a domain: data quality, pipeline stage, BDR follow-up, forecast.
+              Each citizen owns a domain: data quality, pipeline stage, BDR follow-up, forecast accuracy.
               They fetch only broken records from your CRM — no full scans, no wasted compute.
-              Every agent returns a structured <em style="color:var(--terra)">rapport</em>: a score, issues list, and AI summary.
-              If a check fails fatally, it exits via <em style="color:#C0392B">Le Retrait</em> without tainting the mission.
+              Every citizen returns a structured report: a score, flagged issues, and a plain-English summary.
             </div>
           </div>
         </div>
@@ -1150,11 +1061,11 @@
         </div>
 
         <!-- Le Témoin -->
-        <div class="arch-node arch-témoin">
+        <div class="arch-node arch-temoin">
           <div class="arch-mono-badge arch-badge-lt">LT</div>
           <div class="arch-node-content">
             <div class="arch-node-name color-yellow">Le Témoin</div>
-            <div class="arch-node-role">validateur · reviews before write-back</div>
+            <div class="arch-node-role">write-back queue · reviews before every change</div>
             <div class="arch-node-desc">
               No change touches your CRM without passing through Le Témoin.
               Approval can be automatic (high-confidence, low-risk) or require human sign-off.
@@ -1164,22 +1075,6 @@
         </div>
 
       </div>
-
-      <!-- Vocabulary -->
-      <div class="arch-terms">
-        <div class="arch-term">
-          <div class="arch-term-name">une mission</div>
-          <div class="arch-term-def">A coordinated run dispatched by Le Directeur. Multiple agents, one shared context.</div>
-        </div>
-        <div class="arch-term">
-          <div class="arch-term-name">un rapport</div>
-          <div class="arch-term-def">Structured result from each agent: score, issue list, AI summary. Stored as a Bead.</div>
-        </div>
-        <div class="arch-term">
-          <div class="arch-term-name">Le Retrait</div>
-          <div class="arch-term-def">Fail-fast exit. A check that cannot complete exits cleanly without corrupting the mission.</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1188,10 +1083,10 @@
     <div class="container">
       <div class="demo-header">
         <div class="section-label">// live demo</div>
-        <h2 class="section-title">Watch une mission run.</h2>
+        <h2 class="section-title">Watch Le Directeur run.</h2>
         <p class="section-body">
-          Le Directeur dispatches les agents. Each files un rapport.
-          Hit "Lancer la mission" and watch it go.
+          Le Directeur dispatches citizens. Each files a report.
+          The synthesis surfaces what no single citizen could see alone.
         </p>
       </div>
 
@@ -1204,7 +1099,7 @@
         </div>
         <iframe
           src="https://app.revtown.io/demo"
-          title="Revtown mission demo"
+          title="RevTown demo"
           loading="lazy"
           allow="clipboard-write"
         ></iframe>
@@ -1219,16 +1114,16 @@
         <div class="section-label" style="color:rgba(200,92,56,0.7);">// open source</div>
         <h2>The town is <span>open to everyone.</span></h2>
         <p>
-          Browse the resident specialists and run any of them in minutes. Add your own domain knowledge as an agent. Or let Le Directeur coordinate the whole town against your CRM.
+          Pick a citizen and run it against your CRM in two minutes. Add your own domain knowledge and contribute a specialist. Or let Le Directeur coordinate the whole town.
         </p>
         <div class="cta-btns">
-          <a href="/agents.html" class="btn btn-primary btn-lg">Browse the Hub →</a>
+          <a href="#agents" class="btn btn-primary btn-lg">Meet the residents →</a>
           <a href="https://github.com/LeRevOps/leclaw" target="_blank" class="btn btn-outline btn-lg" style="color:#EEE8E2;border-color:rgba(238,232,226,0.2);" onmouseover="this.style.borderColor='rgba(238,232,226,0.5)';this.style.background='rgba(238,232,226,0.05)'" onmouseout="this.style.borderColor='rgba(238,232,226,0.2)';this.style.background='transparent'">View on GitHub →</a>
         </div>
         <div style="margin-top:12px;">
           <a href="https://app.revtown.io" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(200,92,56,0.5);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='rgba(200,92,56,0.9)'" onmouseout="this.style.color='rgba(200,92,56,0.5)'">Run with Le Directeur at app.revtown.io →</a>
         </div>
-        <p class="cta-note" style="margin-top:16px;">MIT licensed · forkable · community-built · bring your own CRM + API key</p>
+        <p class="cta-note" style="margin-top:16px;">MIT licensed · forkable · HubSpot native · bring your own API key</p>
       </div>
     </div>
   </section>
@@ -1241,13 +1136,11 @@
         <ul class="footer-links">
           <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
           <li><a href="https://www.linkedin.com/company/leclaw/" target="_blank">LinkedIn</a></li>
-          <li><a href="/request-agent.html">Request an Agent</a></li>
           <li><a href="/contact.html">Contact</a></li>
           <li><a href="/privacy.html">Privacy</a></li>
           <li><a href="/terms.html">Terms</a></li>
-          <li><a href="/security.html">Security</a></li>
         </ul>
-        <p class="footer-copy">© 2026 Revtown. The open-source GTM agent hub.</p>
+        <p class="footer-copy">© 2026 RevTown. A growing town of AI agents that automate RevOps.</p>
       </div>
     </div>
   </footer>
