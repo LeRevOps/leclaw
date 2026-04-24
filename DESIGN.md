@@ -14,8 +14,8 @@ colors:
   parchment-border:  "oklch(90% 0.008 50)"
   warm-white:        "oklch(98.5% 0.007 52)"
   card-surface:      "oklch(99.5% 0.004 52)"
-  filing-room:       "oklch(18% 0.03 40)"
-  deep-filing-room:  "oklch(13% 0.02 40)"
+  filing-room:       "oklch(18% 0.04 35)"
+  deep-filing-room:  "oklch(13% 0.025 35)"
   light-on-dark:     "oklch(93% 0.01 52)"
 typography:
   display:
@@ -127,8 +127,8 @@ A restrained palette built on one accent and a single warm neutral family. Chrom
 - **Parchment Border** (`oklch(90% 0.008 50)`): All borders at rest. Cards, filter pills, CRM chips, card footer dividers.
 - **Warm White** (`oklch(98.5% 0.007 52)`): Page background on the homepage.
 - **Card Surface** (`oklch(99.5% 0.004 52)`): Card backgrounds, filter pill default background. Barely distinguishable from Warm White — the tint matters for OKLCH coherence, not visual drama.
-- **Filing Room** (`oklch(18% 0.03 40)`): Dark section backgrounds (CTA, contribute section). Warm near-black.
-- **Deep Filing Room** (`oklch(13% 0.02 40)`): Footer background. Deeper than Filing Room; same hue family.
+- **Filing Room** (`oklch(18% 0.04 35)`): Dark section backgrounds (CTA, contribute section). A deep dark expression of the brand hue — the terracotta taken to near-black. Not brown; the orange reads through.
+- **Deep Filing Room** (`oklch(13% 0.025 35)`): Footer background. Same hue as Filing Room, lower lightness. The darkest surface in the system.
 - **Light on Dark** (`oklch(93% 0.01 52)`): Text and button labels rendered on Filing Room or Deep Filing Room surfaces.
 
 ### Named Rules
@@ -136,7 +136,7 @@ A restrained palette built on one accent and a single warm neutral family. Chrom
 
 **The No-Pure-White Rule.** Every neutral must be tinted toward hue 52, chroma ≥ 0.004. `oklch(100% 0 0)` is prohibited. If a surface looks grey, it is the wrong color.
 
-**The Hue-Lock Rule.** All neutrals — light and dark — share hue 50–52. The palette reads as one continuous temperature. Never use a cool grey alongside the warm neutrals.
+**The Hue-Lock Rule.** The palette splits cleanly into two hue families: light surfaces use hue 50–52 (warm white, card, border, muted text), dark surfaces use hue 35 (the brand terracotta taken to near-black). Never introduce a third hue family. Cool grey has no place in this system.
 
 ## 3. Typography
 
