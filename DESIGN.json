@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-04-24T00:00:00Z",
+  "title": "Design System: RevTown",
+  "extensions": {
+    "colorMeta": {
+      "warm-terracotta":  { "role": "primary",   "displayName": "Warm Terracotta",  "canonical": "oklch(57% 0.14 35)",    "tonalRamp": ["oklch(15% 0.04 35)","oklch(25% 0.08 35)","oklch(35% 0.11 35)","oklch(45% 0.13 35)","oklch(57% 0.14 35)","oklch(68% 0.10 35)","oklch(80% 0.06 35)","oklch(94% 0.02 35)"] },
+      "terracotta-deep":  { "role": "primary",   "displayName": "Terracotta Deep",  "canonical": "oklch(49% 0.13 35)",    "tonalRamp": ["oklch(15% 0.04 35)","oklch(25% 0.08 35)","oklch(35% 0.11 35)","oklch(45% 0.13 35)","oklch(49% 0.13 35)","oklch(62% 0.11 35)","oklch(78% 0.07 35)","oklch(93% 0.02 35)"] },
+      "terracotta-pale":  { "role": "primary",   "displayName": "Terracotta Pale",  "canonical": "oklch(96% 0.025 45)",   "tonalRamp": ["oklch(20% 0.04 45)","oklch(35% 0.08 45)","oklch(50% 0.12 45)","oklch(65% 0.1 45)","oklch(78% 0.06 45)","oklch(88% 0.04 45)","oklch(93% 0.03 45)","oklch(96% 0.025 45)"] },
+      "commit-green":     { "role": "secondary", "displayName": "Commit Green",     "canonical": "oklch(52% 0.11 148)",   "tonalRamp": ["oklch(14% 0.03 148)","oklch(24% 0.06 148)","oklch(34% 0.09 148)","oklch(44% 0.10 148)","oklch(52% 0.11 148)","oklch(64% 0.08 148)","oklch(78% 0.05 148)","oklch(92% 0.02 148)"] },
+      "revenue-ink":      { "role": "neutral",   "displayName": "Revenue Ink",      "canonical": "oklch(17% 0.012 50)",   "tonalRamp": ["oklch(10% 0.008 50)","oklch(17% 0.012 50)","oklch(28% 0.01 50)","oklch(40% 0.01 50)","oklch(52% 0.01 50)","oklch(64% 0.009 50)","oklch(78% 0.008 50)","oklch(92% 0.006 50)"] },
+      "muted-field":      { "role": "neutral",   "displayName": "Muted Field",      "canonical": "oklch(46% 0.01 50)",    "tonalRamp": ["oklch(14% 0.008 50)","oklch(24% 0.01 50)","oklch(34% 0.01 50)","oklch(46% 0.01 50)","oklch(58% 0.009 50)","oklch(70% 0.008 50)","oklch(82% 0.007 50)","oklch(93% 0.006 50)"] },
+      "subtle-rule":      { "role": "neutral",   "displayName": "Subtle Rule",      "canonical": "oklch(70% 0.008 50)",   "tonalRamp": ["oklch(20% 0.008 50)","oklch(34% 0.009 50)","oklch(48% 0.009 50)","oklch(60% 0.009 50)","oklch(70% 0.008 50)","oklch(80% 0.007 50)","oklch(89% 0.006 50)","oklch(96% 0.005 50)"] },
+      "parchment-border": { "role": "neutral",   "displayName": "Parchment Border", "canonical": "oklch(90% 0.008 50)",   "tonalRamp": ["oklch(30% 0.008 50)","oklch(45% 0.008 50)","oklch(58% 0.008 50)","oklch(70% 0.008 50)","oklch(80% 0.008 50)","oklch(87% 0.008 50)","oklch(90% 0.008 50)","oklch(96% 0.006 50)"] },
+      "warm-white":       { "role": "neutral",   "displayName": "Warm White",       "canonical": "oklch(98.5% 0.007 52)", "tonalRamp": ["oklch(20% 0.007 52)","oklch(38% 0.007 52)","oklch(55% 0.007 52)","oklch(70% 0.007 52)","oklch(82% 0.007 52)","oklch(91% 0.007 52)","oklch(96% 0.007 52)","oklch(98.5% 0.007 52)"] },
+      "card-surface":     { "role": "neutral",   "displayName": "Card Surface",     "canonical": "oklch(99.5% 0.004 52)", "tonalRamp": ["oklch(22% 0.004 52)","oklch(40% 0.004 52)","oklch(58% 0.004 52)","oklch(72% 0.004 52)","oklch(84% 0.004 52)","oklch(92% 0.004 52)","oklch(97% 0.004 52)","oklch(99.5% 0.004 52)"] },
+      "filing-room":      { "role": "neutral",   "displayName": "Filing Room",      "canonical": "oklch(18% 0.03 40)",    "tonalRamp": ["oklch(10% 0.02 40)","oklch(18% 0.03 40)","oklch(28% 0.03 40)","oklch(40% 0.03 40)","oklch(54% 0.025 40)","oklch(68% 0.02 40)","oklch(82% 0.015 40)","oklch(94% 0.008 40)"] },
+      "deep-filing-room": { "role": "neutral",   "displayName": "Deep Filing Room", "canonical": "oklch(13% 0.02 40)",    "tonalRamp": ["oklch(8% 0.015 40)","oklch(13% 0.02 40)","oklch(22% 0.025 40)","oklch(35% 0.03 40)","oklch(50% 0.025 40)","oklch(65% 0.02 40)","oklch(80% 0.015 40)","oklch(93% 0.008 40)"] },
+      "light-on-dark":    { "role": "neutral",   "displayName": "Light on Dark",    "canonical": "oklch(93% 0.01 52)",    "tonalRamp": ["oklch(20% 0.01 52)","oklch(36% 0.01 52)","oklch(52% 0.01 52)","oklch(66% 0.01 52)","oklch(78% 0.01 52)","oklch(86% 0.01 52)","oklch(90% 0.01 52)","oklch(93% 0.01 52)"] }
+    },
+    "typographyMeta": {
+      "display":  { "displayName": "Display",  "purpose": "Homepage headline only — 'Welcome to Revtown.' Never used in the catalog." },
+      "headline": { "displayName": "Headline", "purpose": "Dark CTA section titles and large section headings." },
+      "title":    { "displayName": "Title",    "purpose": "Page title in Agent Hub header and section subheadings." },
+      "body":     { "displayName": "Body",     "purpose": "All descriptive text. Max 65ch on prose surfaces." },
+      "label":    { "displayName": "Label",    "purpose": "All technical identifiers: agent names, filter pills, status badges, check counts, CRM chips, stats." }
+    },
+    "shadows": [
+      { "name": "card-hover", "value": "0 2px 12px oklch(17% 0.012 50 / 0.07)", "purpose": "Applied on .agent-card:hover only, paired with border-color darkening. State change, not decoration." }
+    ],
+    "motion": [
+      { "name": "standard", "value": "0.12s ease-out", "purpose": "Default transition duration for color, border-color, opacity, box-shadow." },
+      { "name": "slow",     "value": "0.15s ease-out", "purpose": "Card hover transitions where the state change warrants slightly more time." }
+    ],
+    "breakpoints": [
+      { "name": "mobile", "value": "700px",  "purpose": "Nav links hidden, single-column grid, reduced padding." },
+      { "name": "tablet", "value": "860px",  "purpose": "Hero and section padding reduction." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA. Used for 'Get Started Free', 'Browse agents', 'Run →', 'Contributing guide'.",
+      "html": "<button class=\"ds-btn-primary\">Get Started Free</button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 8px; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; border: none; background: oklch(57% 0.14 35); color: oklch(93% 0.01 52); transition: background 0.12s; } .ds-btn-primary:hover { background: oklch(49% 0.13 35); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(57% 0.14 35); outline-offset: 2px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary CTA. Used alongside primary buttons for 'Open dashboard', 'View on GitHub'.",
+      "html": "<button class=\"ds-btn-outline\">View on GitHub →</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 8px; font-family: 'Inter', system-ui, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; text-decoration: none; background: transparent; color: oklch(57% 0.14 35); border: 1px solid oklch(57% 0.14 35 / 0.35); transition: all 0.12s; } .ds-btn-outline:hover { border-color: oklch(57% 0.14 35); background: oklch(96% 0.025 45); } .ds-btn-outline:focus-visible { outline: 2px solid oklch(57% 0.14 35); outline-offset: 2px; }"
+    },
+    {
+      "name": "Filter Pill",
+      "kind": "chip",
+      "refersTo": "filter-pill",
+      "description": "Catalog filter controls. Default and active states. Pill radius only for these — not for buttons.",
+      "html": "<div style=\"display:flex;gap:6px;\"><button class=\"ds-filter-pill\">HubSpot</button><button class=\"ds-filter-pill ds-filter-pill--active\">Live</button></div>",
+      "css": ".ds-filter-pill { padding: 4px 12px; border-radius: 100px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; cursor: pointer; border: 1px solid oklch(90% 0.008 50); background: oklch(99.5% 0.004 52); color: oklch(46% 0.01 50); transition: all 0.12s; } .ds-filter-pill:hover { color: oklch(17% 0.012 50); border-color: oklch(17% 0.012 50 / 0.18); } .ds-filter-pill--active { background: oklch(96% 0.025 45); border-color: oklch(57% 0.14 35 / 0.35); color: oklch(57% 0.14 35); } .ds-filter-pill:focus-visible { outline: 2px solid oklch(57% 0.14 35); outline-offset: 2px; }"
+    },
+    {
+      "name": "Agent Card",
+      "kind": "card",
+      "refersTo": "agent-card",
+      "description": "The signature component. Docker Hub-style: domain avatar, agent name + namespace, status pill, description, actions, footer tray.",
+      "html": "<div class=\"ds-agent-card\"><div class=\"ds-card-body\"><div class=\"ds-card-header\"><div class=\"ds-agent-avatar\" style=\"background:oklch(96% 0.025 45);color:oklch(57% 0.14 35);\">DQ</div><div class=\"ds-card-title\"><div class=\"ds-agent-name\">le-data-quality</div><div class=\"ds-agent-ns\">revtown/core</div></div><span class=\"ds-status-pill ds-status-live\">live</span></div><p class=\"ds-agent-desc\">Audits contacts and companies for missing critical fields. Generates a CRM health score.</p><div class=\"ds-card-actions\"><a href=\"#\" class=\"ds-action-run\">Run →</a><a href=\"#\" class=\"ds-action-ghost\">Fork</a></div></div><div class=\"ds-card-footer\"><div class=\"ds-crm-chips\"><span class=\"ds-crm-chip\">hubspot</span></div><span class=\"ds-check-stat\">7 checks</span></div></div>",
+      "css": ".ds-agent-card { background: oklch(99.5% 0.004 52); border: 1px solid oklch(90% 0.008 50); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; width: 300px; transition: box-shadow 0.15s, border-color 0.15s; } .ds-agent-card:hover { box-shadow: 0 2px 12px oklch(17% 0.012 50 / 0.07); border-color: oklch(79% 0.01 50); } .ds-card-body { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; gap: 10px; } .ds-card-header { display: flex; align-items: flex-start; gap: 12px; } .ds-agent-avatar { width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; flex-shrink: 0; } .ds-card-title { flex: 1; min-width: 0; padding-top: 2px; } .ds-agent-name { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: oklch(17% 0.012 50); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-agent-ns { font-size: 11px; color: oklch(70% 0.008 50); margin-top: 1px; font-family: 'Inter', sans-serif; } .ds-status-pill { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; padding: 3px 7px; border-radius: 4px; flex-shrink: 0; white-space: nowrap; margin-top: 1px; } .ds-status-live { background: oklch(52% 0.11 148 / 0.1); color: oklch(44% 0.1 148); border: 1px solid oklch(52% 0.11 148 / 0.2); } .ds-status-soon { background: oklch(17% 0.012 50 / 0.04); color: oklch(46% 0.01 50); border: 1px solid oklch(17% 0.012 50 / 0.08); } .ds-status-planned { background: transparent; color: oklch(70% 0.008 50); border: 1px solid oklch(17% 0.012 50 / 0.06); } .ds-agent-desc { font-family: 'Inter', sans-serif; font-size: 12.5px; color: oklch(46% 0.01 50); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } .ds-card-actions { display: flex; gap: 6px; } .ds-action-run { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; padding: 5px 11px; border-radius: 5px; text-decoration: none; background: oklch(57% 0.14 35); color: oklch(93% 0.01 52); border: none; transition: background 0.12s; display: inline-flex; align-items: center; cursor: pointer; } .ds-action-run:hover { background: oklch(49% 0.13 35); } .ds-action-ghost { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; padding: 5px 11px; border-radius: 5px; text-decoration: none; background: transparent; color: oklch(46% 0.01 50); border: 1px solid oklch(90% 0.008 50); transition: all 0.12s; display: inline-flex; align-items: center; cursor: pointer; } .ds-action-ghost:hover { color: oklch(17% 0.012 50); border-color: oklch(17% 0.012 50 / 0.2); } .ds-card-footer { padding: 9px 18px; border-top: 1px solid oklch(93% 0.007 52); background: oklch(99% 0.005 52); display: flex; align-items: center; justify-content: space-between; } .ds-crm-chips { display: flex; gap: 4px; } .ds-crm-chip { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; padding: 2px 6px; border-radius: 3px; border: 1px solid oklch(90% 0.008 50); color: oklch(70% 0.008 50); } .ds-check-stat { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: oklch(70% 0.008 50); }"
+    },
+    {
+      "name": "Status Pill",
+      "kind": "chip",
+      "refersTo": "agent-card",
+      "description": "Four states: live (green), beta (terracotta), soon (grey), planned (ghost). Appears inside agent cards only.",
+      "html": "<div style=\"display:flex;gap:6px;align-items:center;\"><span class=\"ds-sp ds-sp-live\">live</span><span class=\"ds-sp ds-sp-beta\">beta</span><span class=\"ds-sp ds-sp-soon\">coming soon</span><span class=\"ds-sp ds-sp-planned\">planned</span></div>",
+      "css": ".ds-sp { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; padding: 3px 7px; border-radius: 4px; white-space: nowrap; } .ds-sp-live { background: oklch(52% 0.11 148 / 0.1); color: oklch(44% 0.1 148); border: 1px solid oklch(52% 0.11 148 / 0.2); } .ds-sp-beta { background: oklch(57% 0.14 35 / 0.08); color: oklch(49% 0.13 35); border: 1px solid oklch(57% 0.14 35 / 0.2); } .ds-sp-soon { background: oklch(17% 0.012 50 / 0.04); color: oklch(46% 0.01 50); border: 1px solid oklch(17% 0.012 50 / 0.08); } .ds-sp-planned { background: transparent; color: oklch(70% 0.008 50); border: 1px solid oklch(17% 0.012 50 / 0.06); }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "Sticky top nav. Blur-backed, near-opaque. Logo left, links center, CTA right. Links collapse on mobile.",
+      "html": "<nav class=\"ds-nav\"><a href=\"/\" class=\"ds-nav-logo\"><div class=\"ds-nav-wordmark\"><span class=\"ds-re\">Rev</span><span class=\"ds-town\">town</span></div></a><ul class=\"ds-nav-links\"><li><a href=\"/agents.html\">Agent Hub</a></li><li><a href=\"#\">GitHub</a></li></ul><button class=\"ds-btn-primary\" style=\"padding:7px 16px;font-size:13px;\">Get Started Free</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 54px; background: oklch(97% 0.008 52 / 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid oklch(90% 0.008 50); } .ds-nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; } .ds-nav-wordmark { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 20px; font-weight: 600; } .ds-re { color: oklch(57% 0.14 35); } .ds-town { color: oklch(17% 0.012 50); } .ds-nav-links { display: flex; align-items: center; gap: 24px; list-style: none; } .ds-nav-links a { color: oklch(46% 0.01 50); text-decoration: none; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; transition: color 0.12s; } .ds-nav-links a:hover { color: oklch(17% 0.012 50); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ops Room",
+    "overview": "RevTown's visual system is built around a single premise: the catalog is the product. There is no pitch, no funnel, no hero section explaining why CRM hygiene matters. You browse agents, pull one, run it — the same interaction model as Docker Hub. Every surface decision follows that logic: identify what's decorative, remove it, document what remains.\n\nThe typeface split defines the experience. Cormorant Garamond carries section headers and the homepage headline. The moment you enter the Agent Hub, JetBrains Mono takes over: agent names, filter pills, status badges, check counts, CRM chips. The terminal shift is intentional.\n\nColors are restrained. Warm Terracotta is the only accent. Every background is tinted warm (hue 52), never pure white. This system explicitly rejects LLM-default aesthetics: gradient blobs, hero metrics, glassmorphism, 'ten-x your pipeline' copy.",
+    "keyCharacteristics": [
+      "Catalog-first density: the Agent Hub is the product, not a feature page",
+      "Terminal shift: JetBrains Mono dominates the catalog; Cormorant belongs to headings only",
+      "Warm throughout: every surface tinted toward hue 52, from card white to near-black footer",
+      "Flat by default: no ambient shadows — only a border shift and minimal elevation on hover",
+      "One accent, used sparingly: Warm Terracotta on 10% or less of any given screen"
+    ],
+    "rules": [
+      { "name": "The Terracotta Rule",       "body": "Warm Terracotta is the only accent color. It appears on 10% or less of any screen. Do not introduce a second accent. Secondary emphasis is achieved through weight, size, or mono font shift — not color.", "section": "colors" },
+      { "name": "The No-Pure-White Rule",    "body": "Every neutral must be tinted toward hue 52, chroma 0.004 or more. Pure oklch(100% 0 0) is prohibited. If a surface looks grey, it is the wrong color.", "section": "colors" },
+      { "name": "The Hue-Lock Rule",         "body": "All neutrals — light and dark — share hue 50–52. The palette reads as one continuous temperature. Never use a cool grey alongside the warm neutrals.", "section": "colors" },
+      { "name": "The Terminal Shift Rule",   "body": "The moment a user enters the Agent Hub, Cormorant yields to JetBrains Mono. Agent names, filter labels, status pills, and all catalog metadata render in mono. Cormorant does not appear in the catalog grid.", "section": "typography" },
+      { "name": "The Scale Ratio Rule",      "body": "A minimum 1.3x ratio between adjacent hierarchy steps. Flat type scales are prohibited.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule",  "body": "Surfaces are flat at rest. The single hover shadow is a state signal, not an aesthetic. Ambient shadows on cards, panels, or nav elements are prohibited.", "section": "elevation" }
+    ],
+    "dos": [
+      "Use Warm Terracotta exclusively on interactive elements: primary buttons, active filter states, Run actions, the Rev wordmark, and hover text links.",
+      "Use JetBrains Mono for every technical identifier in the catalog: agent names, filter pills, status pills, CRM chips, check counts, hub stats, code blocks.",
+      "Tint every neutral toward hue 50–52 in OKLCH. No pure white, no cool grey.",
+      "Use OKLCH for all color declarations. The warm-tinting logic depends on consistent hue and chroma.",
+      "Differentiate card states visually: live cards show Run/Fork actions; soon cards show Request early access; planned cards show nothing below the description.",
+      "Keep card hover minimal: border color shift plus 0 2px 12px shadow only.",
+      "Cap body copy line length at 65ch on prose surfaces."
+    ],
+    "donts": [
+      "Don't use gradient text (background-clip: text with a gradient). Prohibited in all contexts.",
+      "Don't use border-left or border-right greater than 1px as a colored side stripe on cards, callouts, or list items.",
+      "Don't use glassmorphism as decoration. The nav uses backdrop blur functionally — that is the only permitted use.",
+      "Don't reproduce the hero-metric template: big number, small label, grid of stats.",
+      "Don't use generic AI product aesthetics: gradient blobs, neon accents, purple/blue/glass combinations.",
+      "Don't design to look like it was generated — sloppy spacing, unrefined proportions, every component at the same visual weight.",
+      "Don't use pure oklch(100% 0 0) or oklch(0% 0 0) anywhere. Every neutral carries warmth.",
+      "Don't introduce a second accent color. Commit Green is for status signaling only.",
+      "Don't animate layout properties (width, height, padding, margin). Transition color, opacity, box-shadow, and border-color only.",
+      "Don't use em dashes in copy."
+    ]
+  }
+}

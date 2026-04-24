@@ -11,17 +11,20 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #FAF8F5;
-      --bg-card:   #FFFFFF;
-      --terra:     #C85C38;
-      --terra-dim: #A84828;
-      --terra-pale:#FEF3EE;
-      --green:     #2D8653;
-      --ink:       #1F1A17;
-      --muted:     #6A6360;
-      --subtle:    #ADA6A2;
-      --border:    #E2DDD8;
-      --border-sm: rgba(31,26,23,0.07);
+      --bg:        oklch(98.5% 0.007 52);
+      --bg-card:   oklch(99.5% 0.004 52);
+      --terra:     oklch(57% 0.14 35);
+      --terra-dim: oklch(49% 0.13 35);
+      --terra-pale:oklch(96% 0.025 45);
+      --green:     oklch(52% 0.11 148);
+      --ink:       oklch(17% 0.012 50);
+      --muted:     oklch(46% 0.01 50);
+      --subtle:    oklch(70% 0.008 50);
+      --border:    oklch(90% 0.008 50);
+      --border-sm: oklch(90% 0.008 50 / 0.07);
+      --dark-bg:   oklch(18% 0.03 40);
+      --darker-bg: oklch(13% 0.02 40);
+      --light-txt: oklch(93% 0.01 52);
     }
 
     html { scroll-behavior: smooth; }
@@ -45,7 +48,7 @@
       justify-content: space-between;
       padding: 0 40px;
       height: 56px;
-      background: rgba(250,248,245,0.95);
+      background: oklch(98.5% 0.007 52 / 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -66,9 +69,9 @@
       font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
       cursor: pointer; text-decoration: none; transition: all 0.15s; border: none;
     }
-    .btn-primary { background: var(--terra); color: #fff; }
+    .btn-primary { background: var(--terra); color: var(--light-txt); }
     .btn-primary:hover { background: var(--terra-dim); }
-    .btn-outline { background: transparent; color: var(--terra); border: 1px solid rgba(200,92,56,0.35); }
+    .btn-outline { background: transparent; color: var(--terra); border: 1px solid oklch(57% 0.14 35 / 0.35); }
     .btn-outline:hover { border-color: var(--terra); background: var(--terra-pale); }
     .btn-lg { padding: 11px 26px; font-size: 14px; border-radius: 8px; }
 
@@ -84,7 +87,7 @@
       align-items: center;
       gap: 8px;
       padding: 4px 12px;
-      border: 1px solid rgba(200,92,56,0.25);
+      border: 1px solid oklch(57% 0.14 35 / 0.25);
       border-radius: 100px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10.5px;
@@ -125,27 +128,17 @@
 
     .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 
-    .hero-stats {
+    .hero-meta {
+      margin-top: 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--subtle);
       display: flex;
-      gap: 28px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
+      gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
-
-    .hero-stat { }
-
-    .hero-stat-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 600;
-      color: var(--terra);
-      line-height: 1;
-      margin-bottom: 2px;
-    }
-
-    .hero-stat-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
+    .hero-meta em { opacity: 0.35; font-style: normal; }
 
     /* AGENTS PREVIEW */
     .agents-section {
@@ -197,7 +190,10 @@
       text-decoration: none;
       color: inherit;
     }
-    .agent-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.07); border-color: #C5BEB8; }
+    .agent-card:hover {
+      box-shadow: 0 2px 12px oklch(17% 0.012 50 / 0.07);
+      border-color: oklch(79% 0.01 50);
+    }
 
     .card-body {
       padding: 16px 18px;
@@ -246,10 +242,10 @@
       white-space: nowrap;
       margin-top: 1px;
     }
-    .status-live    { background: rgba(45,134,83,0.1);  color: #1E6B42; border: 1px solid rgba(45,134,83,0.2); }
-    .status-beta    { background: rgba(200,92,56,0.08); color: #A84828; border: 1px solid rgba(200,92,56,0.2); }
-    .status-soon    { background: rgba(31,26,23,0.04);  color: var(--muted); border: 1px solid rgba(31,26,23,0.08); }
-    .status-planned { background: transparent; color: var(--subtle); border: 1px solid rgba(31,26,23,0.06); }
+    .status-live    { background: oklch(52% 0.11 148 / 0.1);  color: oklch(44% 0.1 148);  border: 1px solid oklch(52% 0.11 148 / 0.2); }
+    .status-beta    { background: oklch(57% 0.14 35 / 0.08);  color: var(--terra-dim);     border: 1px solid oklch(57% 0.14 35 / 0.2); }
+    .status-soon    { background: oklch(17% 0.012 50 / 0.04); color: var(--muted);         border: 1px solid oklch(17% 0.012 50 / 0.08); }
+    .status-planned { background: transparent;                 color: var(--subtle);        border: 1px solid oklch(17% 0.012 50 / 0.06); }
 
     .agent-desc {
       font-size: 12.5px;
@@ -263,8 +259,8 @@
 
     .card-footer {
       padding: 9px 18px;
-      border-top: 1px solid #EEEAE6;
-      background: #FDFCFB;
+      border-top: 1px solid oklch(93% 0.007 52);
+      background: oklch(99% 0.005 52);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -287,7 +283,7 @@
 
     /* CTA */
     .cta-section {
-      background: #2A1A12;
+      background: var(--dark-bg);
       padding: 80px 40px;
       text-align: center;
     }
@@ -298,12 +294,12 @@
       font-weight: 600;
       line-height: 1.1;
       margin-bottom: 14px;
-      color: #EEE8E2;
+      color: var(--light-txt);
     }
     .cta-section h2 span { color: var(--terra); }
 
     .cta-section p {
-      color: rgba(238,232,226,0.55);
+      color: oklch(93% 0.01 52 / 0.55);
       font-size: 15px;
       max-width: 440px;
       margin: 0 auto 32px;
@@ -316,21 +312,24 @@
       display: inline-flex; align-items: center;
       padding: 11px 26px; border-radius: 8px;
       font-size: 14px; font-weight: 500; text-decoration: none;
-      border: 1px solid rgba(238,232,226,0.2);
-      color: rgba(238,232,226,0.7);
+      border: 1px solid oklch(93% 0.01 52 / 0.2);
+      color: oklch(93% 0.01 52 / 0.7);
       transition: all 0.15s;
     }
-    .btn-cta-ghost:hover { border-color: rgba(238,232,226,0.45); color: #EEE8E2; }
+    .btn-cta-ghost:hover {
+      border-color: oklch(93% 0.01 52 / 0.45);
+      color: var(--light-txt);
+    }
 
     .cta-note {
       margin-top: 18px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 10.5px;
-      color: rgba(200,92,56,0.45);
+      color: oklch(57% 0.14 35 / 0.45);
     }
 
     /* FOOTER */
-    footer { background: #1F1208; padding: 28px 40px; }
+    footer { background: var(--darker-bg); padding: 28px 40px; }
 
     .footer-inner {
       display: flex;
@@ -344,13 +343,13 @@
 
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; }
     .footer-logo .re   { color: var(--terra); }
-    .footer-logo .town { color: rgba(238,232,226,0.65); }
+    .footer-logo .town { color: oklch(93% 0.01 52 / 0.65); }
 
     .footer-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
-    .footer-links a { color: rgba(238,232,226,0.35); text-decoration: none; font-size: 12px; transition: color 0.12s; }
-    .footer-links a:hover { color: rgba(238,232,226,0.7); }
+    .footer-links a { color: oklch(93% 0.01 52 / 0.35); text-decoration: none; font-size: 12px; transition: color 0.12s; }
+    .footer-links a:hover { color: oklch(93% 0.01 52 / 0.7); }
 
-    .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: rgba(200,92,56,0.35); }
+    .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: oklch(57% 0.14 35 / 0.35); }
 
     @media (max-width: 860px) {
       nav { padding: 0 20px; }
@@ -397,24 +396,15 @@
       <a href="https://app.revtown.io" class="btn btn-outline btn-lg">Open dashboard →</a>
     </div>
 
-    <div class="hero-stats" id="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num" id="stat-live">—</div>
-        <div class="hero-stat-label">citizens live today</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num" id="stat-total">—</div>
-        <div class="hero-stat-label">citizens total</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">MIT</div>
-        <div class="hero-stat-label">open to all</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">2 min</div>
-        <div class="hero-stat-label">to first run</div>
-      </div>
-    </div>
+    <p class="hero-meta">
+      <span id="stat-live-text">—</span> live
+      <em>·</em>
+      <span id="stat-total-text">—</span> total
+      <em>·</em>
+      MIT licensed
+      <em>·</em>
+      2 min setup
+    </p>
   </section>
 
   <section class="agents-section" id="agents">
@@ -432,7 +422,7 @@
     <p>Pick a citizen and run it against your CRM in two minutes. Or let Le Directeur coordinate the whole town.</p>
     <div class="cta-btns">
       <a href="/agents.html" class="btn btn-primary btn-lg">Browse agents →</a>
-      <a href="https://github.com/LeRevOps/leclaw" target="_blank" class="btn-cta-ghost btn-lg">View on GitHub →</a>
+      <a href="https://github.com/LeRevOps/leclaw" target="_blank" class="btn-cta-ghost">View on GitHub →</a>
     </div>
     <p class="cta-note">MIT licensed · forkable · bring your own API key</p>
   </section>
@@ -453,17 +443,17 @@
 
   <script>
     const DOMAIN_COLOR = {
-      'data-quality': { bg: '#FEF3EE', fg: '#C85C38' },
-      'pipeline':     { bg: '#EEF6F0', fg: '#2D8653' },
-      'bdr':          { bg: '#EEF2FE', fg: '#3B5EC8' },
-      'activities':   { bg: '#F5EFFE', fg: '#6D28D9' },
-      'forecast':     { bg: '#FFFBEB', fg: '#B45309' },
-      'duplicates':   { bg: '#FDF2F8', fg: '#BE185D' },
-      'commission':   { bg: '#F0FDFA', fg: '#0D9488' },
-      'routing':      { bg: '#FFF7ED', fg: '#C2410C' },
-      'qbr':          { bg: '#EEF2FF', fg: '#4338CA' },
-      'renewal':      { bg: '#FFF1F2', fg: '#BE123C' },
-      'territory':    { bg: '#F7FEE7', fg: '#65A30D' },
+      'data-quality': { bg: 'oklch(96% 0.025 45)',  fg: 'oklch(57% 0.14 35)' },
+      'pipeline':     { bg: 'oklch(96% 0.02 148)',   fg: 'oklch(52% 0.11 148)' },
+      'bdr':          { bg: 'oklch(96% 0.018 260)',  fg: 'oklch(48% 0.12 260)' },
+      'activities':   { bg: 'oklch(96% 0.025 290)',  fg: 'oklch(44% 0.15 290)' },
+      'forecast':     { bg: 'oklch(97% 0.025 80)',   fg: 'oklch(52% 0.12 75)' },
+      'duplicates':   { bg: 'oklch(96% 0.025 340)',  fg: 'oklch(48% 0.15 340)' },
+      'commission':   { bg: 'oklch(97% 0.02 185)',   fg: 'oklch(48% 0.1 185)' },
+      'routing':      { bg: 'oklch(97% 0.025 50)',   fg: 'oklch(50% 0.14 40)' },
+      'qbr':          { bg: 'oklch(96% 0.02 270)',   fg: 'oklch(45% 0.14 270)' },
+      'renewal':      { bg: 'oklch(97% 0.02 20)',    fg: 'oklch(46% 0.14 20)' },
+      'territory':    { bg: 'oklch(97% 0.025 130)',  fg: 'oklch(53% 0.13 130)' },
     };
 
     const STATUS_CLASS = { live: 'status-live', beta: 'status-beta', soon: 'status-soon', planned: 'status-planned' };
@@ -476,7 +466,7 @@
     }
 
     function getAvatarStyle(domain) {
-      const c = DOMAIN_COLOR[domain] || { bg: '#F5F0EB', fg: '#7A6E68' };
+      const c = DOMAIN_COLOR[domain] || { bg: 'oklch(96% 0.01 52)', fg: 'oklch(46% 0.01 50)' };
       return `background:${c.bg};color:${c.fg};`;
     }
 
@@ -485,8 +475,8 @@
       const data = await res.json();
       const agents = data.agents;
 
-      document.getElementById('stat-total').textContent = agents.length;
-      document.getElementById('stat-live').textContent = agents.filter(a => a.status === 'live' || a.status === 'beta').length;
+      document.getElementById('stat-live-text').textContent = agents.filter(a => a.status === 'live' || a.status === 'beta').length;
+      document.getElementById('stat-total-text').textContent = agents.length;
 
       const grid = document.getElementById('agent-grid');
       grid.innerHTML = agents.map(agent => {
