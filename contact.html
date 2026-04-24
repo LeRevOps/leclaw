@@ -3,125 +3,303 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact — LeClaw</title>
+  <title>Contact — Revtown</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #080E14; --bg-card: #0C1620; --sky: #7EC8E3;
-      --green: #4ADE80; --white: #EEF2F6; --muted: #8899AA;
-      --border: rgba(126,200,227,0.12); --border-sm: rgba(255,255,255,0.06);
+      --bg:        oklch(97% 0.008 52);
+      --card:      oklch(99.5% 0.004 52);
+      --terra:     oklch(57% 0.14 35);
+      --terra-dim: oklch(49% 0.13 35);
+      --terra-pale:oklch(96% 0.025 45);
+      --ink:       oklch(17% 0.012 50);
+      --muted:     oklch(46% 0.01 50);
+      --subtle:    oklch(70% 0.008 50);
+      --border:    oklch(90% 0.008 50);
+      --darker-bg: oklch(7% 0.003 52);
+      --light-txt: oklch(93% 0.01 52);
     }
-    body { background: var(--bg); color: var(--white); font-family: 'Inter', sans-serif; font-size: 16px; line-height: 1.7; }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: radial-gradient(circle, rgba(126,200,227,0.06) 1px, transparent 1px);
-      background-size: 32px 32px; pointer-events: none; z-index: 0;
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
     }
+
+    /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 60px;
-      background: rgba(8,14,20,0.85); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 54px;
+      background: oklch(97% 0.008 52 / 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-    .nav-wordmark { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; }
-    .nav-wordmark .le { color: var(--sky); }
-    .nav-wordmark .claw { color: var(--white); }
-    main { position: relative; z-index: 1; max-width: 560px; margin: 0 auto; padding: 120px 40px 80px; }
-    .label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sky); margin-bottom: 16px; }
-    h1 { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 600; margin-bottom: 12px; }
-    .subtitle { color: var(--muted); margin-bottom: 48px; }
-    .form-group { margin-bottom: 24px; }
-    label { display: block; font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 8px; }
-    input, textarea, select {
-      width: 100%; background: var(--bg-card); border: 1px solid var(--border);
-      border-radius: 8px; padding: 12px 16px; color: var(--white);
-      font-family: 'Inter', sans-serif; font-size: 15px; outline: none;
-      transition: border-color 0.15s;
+
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-wordmark { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; }
+    .nav-wordmark .re   { color: var(--terra); }
+    .nav-wordmark .town { color: var(--ink); }
+
+    .nav-links { display: flex; align-items: center; gap: 24px; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.12s; }
+    .nav-links a:hover { color: var(--ink); }
+
+    .btn-nav {
+      display: inline-flex; align-items: center;
+      padding: 7px 16px; border-radius: 6px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      cursor: pointer; text-decoration: none; border: none;
+      background: var(--terra); color: var(--light-txt);
+      transition: background 0.12s;
     }
-    input:focus, textarea:focus, select:focus { border-color: var(--sky); }
+    .btn-nav:hover { background: var(--terra-dim); }
+
+    /* MAIN */
+    main {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 64px 32px 80px;
+    }
+
+    .page-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terra);
+      opacity: 0.8;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 52px);
+      font-weight: 600;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+
+    .page-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+
+    /* FORM */
+    .form-group { margin-bottom: 22px; }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 7px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 10px 14px;
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.12s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--subtle); }
+    input:focus, textarea:focus, select:focus { border-color: var(--terra); }
+
     textarea { resize: vertical; min-height: 120px; }
-    select option { background: var(--bg-card); }
-    .btn {
-      display: inline-block; padding: 12px 28px; border-radius: 8px;
-      font-size: 15px; font-weight: 500; cursor: pointer; border: none;
-      background: var(--sky); color: #080E14; transition: opacity 0.15s;
-      width: 100%; text-align: center;
+
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0; height: 0;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--subtle);
+      pointer-events: none;
     }
-    .btn:hover { opacity: 0.88; }
-    .links { margin-top: 32px; padding-top: 32px; border-top: 1px solid var(--border-sm); }
-    .links p { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
-    .links a { color: var(--sky); text-decoration: none; font-size: 14px; }
-    .links a:hover { text-decoration: underline; }
-    footer { position: relative; z-index: 1; border-top: 1px solid var(--border-sm); padding: 32px 40px; text-align: center; }
-    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; list-style: none; flex-wrap: wrap; }
-    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .footer-links a:hover { color: var(--white); }
-    .footer-copy { font-size: 12px; color: var(--muted); }
+    .select-wrap select { padding-right: 36px; cursor: pointer; }
+
+    .btn-submit {
+      width: 100%;
+      padding: 11px 24px;
+      border-radius: 7px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: var(--terra);
+      color: var(--light-txt);
+      transition: background 0.12s;
+      margin-top: 4px;
+    }
+    .btn-submit:hover { background: var(--terra-dim); }
+
+    /* QUICK LINKS */
+    .quick-links {
+      margin-top: 36px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .quick-links-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 14px;
+    }
+
+    .quick-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .quick-links-list a {
+      font-size: 13px;
+      color: var(--terra);
+      text-decoration: none;
+      transition: opacity 0.12s;
+    }
+    .quick-links-list a:hover { opacity: 0.7; }
+
+    .quick-links-list span {
+      color: var(--subtle);
+      margin: 0 6px;
+    }
+
+    /* FOOTER */
+    footer { background: var(--darker-bg); padding: 24px 32px; text-align: center; }
+
+    .footer-links {
+      display: flex; gap: 20px; justify-content: center;
+      margin-bottom: 10px; list-style: none; flex-wrap: wrap;
+    }
+    .footer-links a { font-size: 12px; color: oklch(93% 0.01 52 / 0.35); text-decoration: none; transition: color 0.12s; }
+    .footer-links a:hover { color: oklch(93% 0.01 52 / 0.7); }
+
+    .footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: oklch(57% 0.14 35 / 0.35); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 16px; }
+      .nav-links { display: none; }
+      main { padding: 48px 16px 60px; }
+    }
   </style>
 </head>
 <body>
 
   <nav>
     <a href="/" class="nav-logo">
-      <span class="nav-wordmark"><span class="le">Le</span><span class="claw">Claw</span></span>
+      <div class="nav-wordmark"><span class="re">Rev</span><span class="town">town</span></div>
     </a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/agents.html">Agent Hub</a></li>
+      <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
+      <li><a href="/request-agent.html">Request an Agent</a></li>
+    </ul>
+    <a href="https://app.revtown.io" class="btn-nav">Get Started Free</a>
   </nav>
 
   <main>
-    <div class="label">// get in touch</div>
-    <h1>Contact</h1>
-    <p class="subtitle">Questions about LeClaw, the dashboard, or the open source framework — we read everything.</p>
+    <div class="page-label">// get in touch</div>
+    <h1>Contact.</h1>
+    <p class="page-sub">Questions about the dashboard, the open source framework, or the agents — we read everything.</p>
 
     <form action="https://formspree.io/f/xgopekwn" method="POST">
+
       <div class="form-group">
-        <label for="name">Name</label>
+        <label class="form-label" for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Your name" required />
       </div>
+
       <div class="form-group">
-        <label for="email">Email</label>
+        <label class="form-label" for="email">Email</label>
         <input type="email" id="email" name="email" placeholder="you@company.com" required />
       </div>
+
       <div class="form-group">
-        <label for="subject">What's this about?</label>
-        <select id="subject" name="subject">
-          <option value="">Select a topic</option>
-          <option value="dashboard">Dashboard / app.leclaw.io</option>
-          <option value="open-source">Open source framework</option>
-          <option value="enterprise">Enterprise / team access</option>
-          <option value="partnership">Partnership or integration</option>
-          <option value="press">Press or media</option>
-          <option value="other">Other</option>
-        </select>
+        <label class="form-label" for="subject">What's this about?</label>
+        <div class="select-wrap">
+          <select id="subject" name="subject">
+            <option value="">Select a topic</option>
+            <option value="dashboard">Dashboard (app.revtown.io)</option>
+            <option value="open-source">Open source framework</option>
+            <option value="enterprise">Enterprise / team access</option>
+            <option value="partnership">Partnership or integration</option>
+            <option value="press">Press or media</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
       </div>
+
       <div class="form-group">
-        <label for="message">Message</label>
+        <label class="form-label" for="message">Message</label>
         <textarea id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
       </div>
-      <button type="submit" class="btn">Send message →</button>
+
+      <button type="submit" class="btn-submit">Send message →</button>
+
     </form>
 
-    <div class="links">
-      <p>Looking for something specific?</p>
-      <a href="/request-agent.html">Request a new agent →</a><br/><br/>
-      <a href="mailto:hello@leclaw.io">hello@leclaw.io</a> · <a href="https://github.com/LeRevOps/leclaw/issues" target="_blank">GitHub Issues</a> · <a href="/security.html">Report a security issue</a>
+    <div class="quick-links">
+      <div class="quick-links-label">Looking for something specific?</div>
+      <div class="quick-links-list">
+        <a href="/request-agent.html">Request a new agent →</a>
+        <div>
+          <a href="mailto:hello@revtown.io">hello@revtown.io</a>
+          <span>·</span>
+          <a href="https://github.com/LeRevOps/leclaw/issues" target="_blank">GitHub Issues</a>
+          <span>·</span>
+          <a href="/security.html">Report a security issue</a>
+        </div>
+      </div>
     </div>
   </main>
 
   <footer>
     <ul class="footer-links">
       <li><a href="/">Home</a></li>
+      <li><a href="/agents.html">Agent Hub</a></li>
       <li><a href="/privacy.html">Privacy</a></li>
       <li><a href="/terms.html">Terms</a></li>
       <li><a href="/security.html">Security</a></li>
       <li><a href="/contact.html">Contact</a></li>
       <li><a href="https://github.com/LeRevOps/leclaw" target="_blank">GitHub</a></li>
     </ul>
-    <p class="footer-copy">© 2026 LeClaw. Your RevOps team. Runs 24/7.</p>
+    <p class="footer-copy">© 2026 Revtown. The open-source GTM agent hub.</p>
   </footer>
 
 </body>
